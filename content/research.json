@@ -1,0 +1,50 @@
+{
+  "projects": [
+    {
+      "title": "Self-Supervised Representation Learning",
+      "description": "Exploring contrastive and masked modeling approaches for unlabeled data.",
+      "year": "2024",
+      "link": null
+    },
+    {
+      "title": "Efficient Fine-Tuning of Large Language Models",
+      "description": "Low-rank adaptation and parameter-efficient methods for domain adaptation.",
+      "year": "2024",
+      "link": null
+    }
+  ],
+  "papers": {
+    "published": [
+      {
+        "title": "Paper Title et al.",
+        "authors": "Your Name, Co-authors",
+        "venue": "Conference/Journal Name",
+        "year": "2024",
+        "link": "#"
+      }
+    ],
+    "underReview": [
+      {
+        "title": "Work Under Review",
+        "authors": "Your Name et al.",
+        "venue": "Target venue",
+        "year": "2025",
+        "link": null
+      }
+    ],
+    "inProgress": [
+      {
+        "title": "Ongoing Research Project",
+        "authors": "Your Name et al.",
+        "venue": "TBD",
+        "year": "—",
+        "link": null
+      }
+    ]
+  },
+  "conferences": [
+    { "name": "NeurIPS", "year": "2024", "role": "Attendee" },
+    { "name": "ICML", "year": "2024", "role": "Volunteer" }
+  ],
+  "googleScholarUrl": "https://scholar.google.com/"
+}

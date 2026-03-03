@@ -1,0 +1,6 @@
+{
+  "languages": ["Python", "SQL", "Bash"],
+  "mlDl": ["PyTorch", "TensorFlow", "Transformers", "Scikit-learn", "XGBoost"],
+  "mlops": ["Docker", "AWS", "SageMaker", "CI/CD", "MLflow"],
+  "data": ["Pandas", "NumPy", "SQL", "Spark"]
+}

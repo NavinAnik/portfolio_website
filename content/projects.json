@@ -1,0 +1,16 @@
+{
+  "industry": [
+    {
+      "title": "Production ML Pipeline for Recommendations",
+      "description": "End-to-end pipeline for real-time recommendations: feature store, model serving, and A/B evaluation. Deployed on AWS with SageMaker.",
+      "tech": ["Python", "PyTorch", "AWS", "SageMaker", "Docker"],
+      "metrics": ["~15% lift in engagement", "P99 latency < 50ms"]
+    },
+    {
+      "title": "NLP Model Deployment at Scale",
+      "description": "Served transformer-based models for document classification and NER. Optimized inference with quantization and batching.",
+      "tech": ["PyTorch", "Transformers", "Docker", "Kubernetes"],
+      "metrics": ["10x throughput improvement", "Multi-tenant serving"]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-accent: #1e3a5f;
+  --color-accent-dark: #0f2744;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-slate-700 bg-white antialiased;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-serif text-slate-800;
+  }
+}
+
+/* Skip link: off-screen until focused, for accessibility */
+.skip-link {
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  left: -9999px;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+}
+.skip-link:focus {
+  @apply absolute top-4 left-4 w-auto h-auto py-2 px-4 m-0 overflow-visible z-[100] bg-[var(--color-accent)] text-white rounded;
+  clip: auto;
+  clip-path: none;
+}

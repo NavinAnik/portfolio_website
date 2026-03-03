@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const placeholderPosts: Record<
   string,
-  { title: string; date: string; excerpt: string; content: string }
+  { title: string; date: string; excerpt: string; content: string; image: string }
 > = {
   "self-supervised-overview": {
     title: "Self-Supervised Learning: A Short Overview",
@@ -12,6 +13,7 @@ const placeholderPosts: Record<
       "Notes on contrastive and masked self-supervised methods and when they work best.",
     content:
       "This is a placeholder post. Replace with MDX or Markdown content when you add your blog pipeline.",
+    image: "https://picsum.photos/seed/ssl-overview/800/400",
   },
   "pytorch-sagemaker": {
     title: "Deploying PyTorch Models on SageMaker",
@@ -20,6 +22,7 @@ const placeholderPosts: Record<
       "Practical steps for containerizing and serving PyTorch models in production.",
     content:
       "This is a placeholder post. Replace with MDX or Markdown content when you add your blog pipeline.",
+    image: "https://picsum.photos/seed/pytorch-sagemaker/800/400",
   },
   "peft-notes": {
     title: "Parameter-Efficient Fine-Tuning (PEFT)",
@@ -28,6 +31,7 @@ const placeholderPosts: Record<
       "LoRA, adapters, and other efficient ways to adapt large language models.",
     content:
       "This is a placeholder post. Replace with MDX or Markdown content when you add your blog pipeline.",
+    image: "https://picsum.photos/seed/peft-notes/800/400",
   },
 };
 
@@ -68,6 +72,16 @@ export default function BlogPostPage({ params }: BlogPostProps) {
           day: "numeric",
         })}
       </p>
+      <div className="relative w-full aspect-[2/1] rounded-lg overflow-hidden border border-slate-200 mb-10 bg-slate-100">
+        <Image
+          src={post.image}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 1120px"
+          priority
+        />
+      </div>
       <div className="prose prose-slate max-w-none">
         <p className="text-slate-600 leading-relaxed">{post.content}</p>
       </div>

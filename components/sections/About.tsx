@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import SectionTitle from "@/components/ui/SectionTitle";
+
+const PROFILE_IMAGE =
+  "https://picsum.photos/seed/profile/400/400";
 
 export default function About() {
   return (
@@ -17,12 +21,23 @@ export default function About() {
           subtitle="Professional background, research interests, and PhD direction."
         />
         <motion.div
-          className="grid md:grid-cols-2 gap-12"
+          className="grid md:grid-cols-[minmax(0,280px)_1fr] gap-10 md:gap-12 items-start"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
         >
+          <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto md:mx-0 rounded-lg overflow-hidden border border-slate-200 shadow-md flex-shrink-0">
+            <Image
+              src={PROFILE_IMAGE}
+              alt="Profile photo"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 192px, 256px"
+              priority
+            />
+          </div>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-12 min-w-0">
           <div className="space-y-6">
             <div>
               <h3 className="font-serif text-xl font-semibold text-slate-800 mb-2">
@@ -68,6 +83,7 @@ export default function About() {
                 in deploying and evaluating models at scale.
               </p>
             </div>
+          </div>
           </div>
         </motion.div>
       </div>

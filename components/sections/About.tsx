@@ -1,89 +1,154 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionTitle from "@/components/ui/SectionTitle";
 
-const PROFILE_IMAGE =
-  "https://picsum.photos/seed/profile/400/400";
+const PROFILE_IMAGE = "/images/profile.png";
+const PROFILE_FALLBACK = "https://picsum.photos/seed/profile/400/400";
+
+const RESEARCH_INTERESTS = [
+  "Computer vision",
+  "Deep learning",
+  "Generative models",
+  "Optimal transport theory",
+  "Medical image analysis",
+  "Transfer learning",
+];
+
+const RECOGNITION = [
+  "RoboSub USA 2022 — Top 10 Semifinalist & Outstanding Rookie Team",
+  "4th IR Conference 2021 — Top 5 Industrial Projects",
+  "Dean's List & VC's List — 5×",
+];
 
 export default function About() {
+  const [imgError, setImgError] = useState(false);
+  const profileSrc = imgError ? PROFILE_FALLBACK : PROFILE_IMAGE;
+
   return (
     <section
       id="about"
-      className="py-16 md:py-24 px-6 border-t border-slate-100"
+      className="py-20 md:py-28 px-6 border-t bg-white"
+      style={{ borderColor: "var(--color-border)" }}
       aria-labelledby="about-heading"
     >
       <div className="max-w-content mx-auto">
         <SectionTitle
           id="about-heading"
+          label="01 — About"
           title="About Me"
-          subtitle="Professional background, research interests, and PhD direction."
+          subtitle="Research-oriented ML engineer with industry deployment experience and academic focus on generative models and computer vision."
         />
+
         <motion.div
-          className="grid md:grid-cols-[minmax(0,280px)_1fr] gap-10 md:gap-12 items-start"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="space-y-10 md:space-y-12"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto md:mx-0 rounded-lg overflow-hidden border border-slate-200 shadow-md flex-shrink-0">
-            <Image
-              src={PROFILE_IMAGE}
-              alt="Profile photo"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 192px, 256px"
-              priority
-            />
-          </div>
-          <div className="grid md:grid-cols-2 gap-10 md:gap-12 min-w-0">
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-serif text-xl font-semibold text-slate-800 mb-2">
-                Professional background
-              </h3>
-              <p className="text-slate-600 leading-relaxed">
-                I am a Machine Learning Engineer at a multinational company,
-                where I design and ship AI/ML systems that serve millions of
-                users. My work spans model development, MLOps, and
-                cross-functional collaboration with research and product teams.
-              </p>
+          {/* Profile card: photo + credentials */}
+          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+            <div className="flex-shrink-0 mx-auto md:mx-0">
+              <div className="relative w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden ring-4 ring-slate-100 shadow-lg">
+                <Image
+                  src={profileSrc}
+                  alt="S. M. Navin Nayer Anik"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 176px, 224px"
+                  priority
+                  onError={() => setImgError(true)}
+                />
+              </div>
             </div>
-            <div>
-              <h3 className="font-serif text-xl font-semibold text-slate-800 mb-2">
-                Current role & impact
-              </h3>
-              <p className="text-slate-600 leading-relaxed">
-                I lead and contribute to production ML pipelines—from
-                experimentation to deployment on AWS/SageMaker—with a focus on
-                reliability, scalability, and measurable business impact.
-              </p>
+            <div className="flex-1 min-w-0 space-y-4">
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
+                  Education
+                </h3>
+                <p className="font-serif text-lg" style={{ color: "var(--color-text-strong)" }}>
+                  B.Sc. Computer Science & Engineering, BRAC University
+                </p>
+                <p className="text-sm mt-0.5" style={{ color: "var(--color-text-muted)" }}>GPA 3.82</p>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
+                  Thesis
+                </h3>
+                <p className="font-medium leading-relaxed" style={{ color: "var(--color-text-strong)" }}>
+                  Optimal Transport Theory based GAN for Medical Image Augmentation and Classification
+                </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
+                  Current role
+                </h3>
+                <p style={{ color: "var(--color-text)" }}>
+                  Associate Software Engineer II at Cefalo — ML for Aqua Robotics (computer vision, predictive maintenance, underwater automation)
+                </p>
+              </div>
             </div>
           </div>
-          <div className="space-y-6">
+
+          {/* Research interests */}
             <div>
-              <h3 className="font-serif text-xl font-semibold text-slate-800 mb-2">
+              <h3 className="text-sm font-medium uppercase tracking-wider mb-3" style={{ color: "var(--color-text-muted)" }}>
                 Research interests
               </h3>
-              <p className="text-slate-600 leading-relaxed mb-2">
-                AI, Machine Learning, Deep Learning, Self-Supervised Learning,
-                efficient fine-tuning, and representation learning. I am
-                particularly interested in methods that scale with limited
-                labeled data.
-              </p>
+            <ul className="flex flex-wrap gap-2">
+              {RESEARCH_INTERESTS.map((interest) => (
+                <li key={interest}>
+                  <span className="inline-block px-3 py-1.5 text-sm rounded-full transition-colors hover:bg-accent/10"
+                    style={{ color: "var(--color-text)", backgroundColor: "var(--color-surface-muted)" }}
+                  >
+                    {interest}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Experience & recognition: two-column layout */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div>
+              <h3 className="text-sm font-medium uppercase tracking-wider mb-3" style={{ color: "var(--color-text-muted)" }}>
+                Experience
+              </h3>
+              <ul className="space-y-2 text-sm leading-relaxed" style={{ color: "var(--color-text)" }}>
+                <li className="flex gap-2">
+                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
+                  <span>Sub-Team Lead, BRACU DUBURI — Bangladesh&apos;s first autonomous underwater vehicle</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
+                  <span>Machine Vision Engineer, Anusondhani Lab</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
+                  <span>Undergraduate Teaching Assistant, BRAC University</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
+                  <span>CNNs, transformers, transfer learning for underwater and medical imagery</span>
+                </li>
+              </ul>
             </div>
             <div>
-              <h3 className="font-serif text-xl font-semibold text-slate-800 mb-2">
-                PhD goals
+              <h3 className="text-sm font-medium uppercase tracking-wider mb-3" style={{ color: "var(--color-text-muted)" }}>
+                Recognition
               </h3>
-              <p className="text-slate-600 leading-relaxed">
-                I am planning to pursue a PhD to deepen my contributions to
-                fundamental ML research while building on my industry experience
-                in deploying and evaluating models at scale.
-              </p>
+              <ul className="space-y-2 text-sm" style={{ color: "var(--color-text)" }}>
+                {RECOGNITION.map((item, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="shrink-0 mt-1" style={{ color: "var(--color-text-muted)" }}>•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
           </div>
         </motion.div>
       </div>

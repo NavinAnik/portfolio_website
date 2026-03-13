@@ -1,50 +1,46 @@
 {
   "projects": [
     {
-      "title": "Self-Supervised Representation Learning",
-      "description": "Exploring contrastive and masked modeling approaches for unlabeled data.",
-      "year": "2024",
+      "title": "Optimal Transport Theory-based GAN",
+      "description": "Built a GAN based on Optimal Transport theory to generate unreal datasets for improving classification model performance. Implemented in TensorFlow.",
+      "year": "2023",
       "link": null
     },
     {
-      "title": "Efficient Fine-Tuning of Large Language Models",
-      "description": "Low-rank adaptation and parameter-efficient methods for domain adaptation.",
-      "year": "2024",
+      "title": "BRACU DUBURI - Autonomous Underwater Vehicle",
+      "description": "Bangladesh's first AUV. Developed transfer-learning-based object detection for the rover. Uses Jetson Nano as processing unit.",
+      "year": "2019-2023",
+      "link": null
+    },
+    {
+      "title": "Real-time Sleep Detection and Warning System",
+      "description": "Driver sleep detection system that alerts drivers when sleepy. Built with OpenCV.",
+      "year": "—",
+      "link": null
+    },
+    {
+      "title": "Sine-wave Predictor",
+      "description": "Time series prediction using Python, NumPy, Matplotlib, TensorFlow, and Scikit-learn. Sequential model with Dense and SimpleRNN layers.",
+      "year": "—",
       "link": null
     }
   ],
   "papers": {
-    "published": [
-      {
-        "title": "Paper Title et al.",
-        "authors": "Your Name, Co-authors",
-        "venue": "Conference/Journal Name",
-        "year": "2024",
-        "link": "#"
-      }
-    ],
-    "underReview": [
-      {
-        "title": "Work Under Review",
-        "authors": "Your Name et al.",
-        "venue": "Target venue",
-        "year": "2025",
-        "link": null
-      }
-    ],
+    "published": [],
+    "underReview": [],
     "inProgress": [
       {
-        "title": "Ongoing Research Project",
-        "authors": "Your Name et al.",
-        "venue": "TBD",
-        "year": "—",
+        "title": "Optimal Transport Theory based GAN for Medical Image Augmentation and Classification",
+        "authors": "S. M. Navin Nayer Anik",
+        "venue": "Thesis - BRAC University",
+        "year": "2023",
         "link": null
       }
     ]
   },
   "conferences": [
-    { "name": "NeurIPS", "year": "2024", "role": "Attendee" },
-    { "name": "ICML", "year": "2024", "role": "Volunteer" }
+    { "name": "RoboSub International AUV Competition", "year": "2022", "role": "Top 10 Semifinalist & Outstanding Rookie Team (USA)" },
+    { "name": "Conference on 4th IR", "year": "2021", "role": "Top 5 Industrial Projects" }
   ],
   "googleScholarUrl": "https://scholar.google.com/"
 }

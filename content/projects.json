@@ -1,16 +1,18 @@
 {
   "industry": [
     {
-      "title": "Production ML Pipeline for Recommendations",
-      "description": "End-to-end pipeline for real-time recommendations: feature store, model serving, and A/B evaluation. Deployed on AWS with SageMaker.",
-      "tech": ["Python", "PyTorch", "AWS", "SageMaker", "Docker"],
-      "metrics": ["~15% lift in engagement", "P99 latency < 50ms"]
+      "title": "Image Classification for Aqua Robotics Maintenance",
+      "description": "Built end-to-end classification system for Aqua Robotics' maintenance robots that clean fishing plant nets. Detects both growth and hole classes in underwater imagery. Deployed on AWS using Terraform for infrastructure; employs AWS Lambda and Apache Spark for scalable data processing.",
+      "tech": ["Python", "PyTorch", "TensorFlow", "AWS", "Terraform", "Lambda", "Apache Spark", "Computer Vision"],
+      "metrics": ["Real-time detection for underwater nets", "Scalable data processing pipeline"],
+      "link": null
     },
     {
-      "title": "NLP Model Deployment at Scale",
-      "description": "Served transformer-based models for document classification and NER. Optimized inference with quantization and batching.",
-      "tech": ["PyTorch", "Transformers", "Docker", "Kubernetes"],
-      "metrics": ["10x throughput improvement", "Multi-tenant serving"]
+      "title": "ML for Offshore Fish Farm Automation",
+      "description": "Designed ML algorithms to optimize maintenance for offshore fish farms. Implemented computer vision models to monitor fish health, detect anomalies, and ensure optimal conditions. Integrated AI-driven insights into robotic systems for cleaning and inspecting underwater facilities.",
+      "tech": ["Python", "PyTorch", "TensorFlow", "Computer Vision", "Docker", "AWS"],
+      "metrics": ["Predictive maintenance in marine environments", "Real-time anomaly detection"],
+      "link": null
     }
   ]
 }

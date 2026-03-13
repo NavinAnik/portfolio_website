@@ -1,29 +1,30 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Instrument_Serif, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import MotionProvider from "@/components/providers/MotionProvider";
 
-const headingFont = Cormorant_Garamond({
+const headingFont = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
   variable: "--font-heading",
 });
 
-const bodyFont = Source_Sans_3({
+const bodyFont = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
 });
 
 export const metadata: Metadata = {
-  title: "Your Name | ML Engineer & AI Researcher",
+  title: "S. M. Navin Nayer Anik | Associate Software Engineer | AI & ML",
   description:
-    "Machine Learning Engineer at an MNC. Research interests in AI, Deep Learning, and Self-Supervised Learning. PhD aspirant.",
+    "Associate Software Engineer II at Cefalo. ML solutions for Aqua Robotics—fish farming automation, computer vision, predictive maintenance. Former BRACU DUBURI Sub-Team Lead. Thesis: Optimal Transport GAN for medical image augmentation.",
   openGraph: {
-    title: "Your Name | ML Engineer & AI Researcher",
+    title: "S. M. Navin Nayer Anik | Associate Software Engineer | AI & ML",
     description:
-      "Machine Learning Engineer at an MNC. Research interests in AI, Deep Learning, and Self-Supervised Learning.",
+      "Associate Software Engineer II at Cefalo. ML for Aqua Robotics, computer vision, and underwater automation. Former BRACU DUBURI Sub-Team Lead.",
   },
 };
 
@@ -38,17 +39,19 @@ export default function RootLayout({
       className={`${headingFont.variable} ${bodyFont.variable}`}
     >
       <body className="min-h-screen flex flex-col">
-        <a
-          href="#main-content"
-          className="skip-link"
-        >
-          Skip to main content
-        </a>
-        <Header />
-        <main id="main-content" className="flex-1" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
+        <MotionProvider>
+          <a
+            href="#main-content"
+            className="skip-link"
+          >
+            Skip to main content
+          </a>
+          <Header />
+          <main id="main-content" className="flex-1" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

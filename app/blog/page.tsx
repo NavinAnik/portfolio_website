@@ -29,17 +29,20 @@ const placeholderPosts = [
 ];
 
 export const metadata = {
-  title: "Blog & Research Notes | Your Name",
+  title: "Blog & Research Notes | S. M. Navin Nayer Anik",
   description: "Writing about ML research, experiments, and learnings.",
 };
 
 export default function BlogPage() {
   return (
-    <div className="max-w-content mx-auto px-6 py-16">
-      <h1 className="font-serif text-4xl font-semibold text-slate-800 mb-2">
+    <div className="max-w-content mx-auto px-6 py-20 md:py-28">
+      <p className="text-section-label font-medium uppercase tracking-widest text-accent-muted mb-2">
+        Blog
+      </p>
+      <h1 className="font-serif text-4xl font-normal tracking-heading-tight mb-3" style={{ color: "var(--color-text-strong)" }}>
         Blog & Research Notes
       </h1>
-      <p className="text-slate-600 text-lg mb-12">
+      <p className="text-lg mb-12" style={{ color: "var(--color-text-muted)" }}>
         Writing about ML research, experiments, and learnings.
       </p>
       <ul className="space-y-8">
@@ -47,29 +50,30 @@ export default function BlogPage() {
           <li key={post.slug}>
             <Link
               href={`/blog/${post.slug}`}
-              className="block rounded-lg border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-slate-300 transition-all"
+              className="block rounded-xl border bg-white overflow-hidden shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5"
+              style={{ borderColor: "var(--color-border)" }}
             >
-              <div className="relative w-full aspect-[2/1] bg-slate-100">
+              <div className="relative w-full aspect-[2/1] overflow-hidden" style={{ backgroundColor: "var(--color-surface-muted)" }}>
                 <Image
                   src={post.image}
-                  alt=""
+                  alt={`Illustration for blog post: ${post.title}`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 1120px"
+                  sizes="(max-width: 768px) 100vw, 960px"
                 />
               </div>
               <div className="p-6">
-                <h2 className="font-serif text-xl font-semibold text-slate-800 mb-2">
+                <h2 className="font-serif text-xl font-normal mb-2" style={{ color: "var(--color-text-strong)" }}>
                   {post.title}
                 </h2>
-                <p className="text-slate-500 text-sm mb-2">
+                <p className="text-sm mb-2" style={{ color: "var(--color-text-muted)" }}>
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
                   })}
                 </p>
-                <p className="text-slate-600">{post.excerpt}</p>
+                <p style={{ color: "var(--color-text)" }}>{post.excerpt}</p>
               </div>
             </Link>
           </li>
@@ -78,7 +82,7 @@ export default function BlogPage() {
       <div className="mt-12">
         <Link
           href="/"
-          className="text-[var(--color-accent)] font-medium hover:underline"
+          className="text-accent font-medium hover:underline transition-opacity hover:opacity-80"
         >
           ← Back to home
         </Link>

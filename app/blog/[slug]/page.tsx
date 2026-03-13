@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: BlogPostProps) {
   const post = placeholderPosts[slug];
   if (!post) return { title: "Post not found" };
   return {
-    title: `${post.title} | Your Name`,
+    title: `${post.title} | S. M. Navin Nayer Anik`,
     description: post.excerpt,
   };
 }
@@ -55,35 +55,38 @@ export default function BlogPostPage({ params }: BlogPostProps) {
   if (!post) notFound();
 
   return (
-    <article className="max-w-content mx-auto px-6 py-16">
+    <article className="max-w-content mx-auto px-6 py-20 md:py-28">
       <Link
         href="/blog"
-        className="text-[var(--color-accent)] font-medium hover:underline mb-8 inline-block"
+        className="text-accent font-medium hover:underline mb-8 inline-block transition-opacity hover:opacity-80"
       >
         ← Back to blog
       </Link>
-      <h1 className="font-serif text-4xl font-semibold text-slate-800 mb-2">
+      <h1 className="font-serif text-4xl font-normal tracking-heading-tight mb-2" style={{ color: "var(--color-text-strong)" }}>
         {post.title}
       </h1>
-      <p className="text-slate-500 text-sm mb-8">
+      <p className="text-sm mb-10" style={{ color: "var(--color-text-muted)" }}>
         {new Date(post.date).toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
           day: "numeric",
         })}
       </p>
-      <div className="relative w-full aspect-[2/1] rounded-lg overflow-hidden border border-slate-200 mb-10 bg-slate-100">
+      <div
+        className="relative w-full aspect-[2/1] rounded-xl overflow-hidden border mb-10"
+        style={{ borderColor: "var(--color-border)", backgroundColor: "var(--color-surface-muted)" }}
+      >
         <Image
           src={post.image}
-          alt=""
+          alt={`Illustration for blog post: ${post.title}`}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 1120px"
+          sizes="(max-width: 768px) 100vw, 960px"
           priority
         />
       </div>
-      <div className="prose prose-slate max-w-none">
-        <p className="text-slate-600 leading-relaxed">{post.content}</p>
+      <div className="prose-content max-w-none" style={{ color: "var(--color-text)" }}>
+        <p className="leading-relaxed">{post.content}</p>
       </div>
     </article>
   );

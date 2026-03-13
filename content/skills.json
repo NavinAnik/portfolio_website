@@ -1,6 +1,6 @@
 {
-  "languages": ["Python", "SQL", "Bash"],
-  "mlDl": ["PyTorch", "TensorFlow", "Transformers", "Scikit-learn", "XGBoost"],
-  "mlops": ["Docker", "AWS", "SageMaker", "CI/CD", "MLflow"],
-  "data": ["Pandas", "NumPy", "SQL", "Spark"]
+  "languages": ["Python", "JavaScript", "TypeScript", "Java", "HTML", "CSS", "Bash"],
+  "mlDl": ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "OpenCV", "Computer Vision", "Transfer Learning"],
+  "mlops": ["Docker", "AWS", "Terraform", "Lambda", "Apache Spark", "Git", "CI/CD"],
+  "data": ["Pandas", "NumPy", "SQL", "MySQL"]
 }

@@ -87,8 +87,23 @@ export default function About() {
                   Current role
                 </h3>
                 <p style={{ color: "var(--color-text)" }}>
-                  Associate Software Engineer II at Cefalo — ML for Aqua Robotics (computer vision, predictive maintenance, underwater automation)
+                  Associate Software Engineer II, AI/ML at Cefalo — ML for BioDrone (drone services, AI-driven aerial image analysis for forestry and agriculture)
                 </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
+                  Certifications
+                </h3>
+                <ul className="space-y-1 text-sm" style={{ color: "var(--color-text)" }}>
+                  <li className="flex gap-2">
+                    <span className="mt-0.5" style={{ color: "var(--color-text-muted)" }}>•</span>
+                    <span>OWASP Top 10 for Large Language Model Applications — SecureFlag</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-0.5" style={{ color: "var(--color-text-muted)" }}>•</span>
+                    <span>AI for All: From Basics to GenAI Practice — NVIDIA</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

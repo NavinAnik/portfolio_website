@@ -34,7 +34,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Associate Software Engineer II · Cefalo
+          Associate Software Engineer II, AI/ML · Cefalo
         </motion.p>
         <motion.h1
           className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-heading-tight mb-4"
@@ -61,7 +61,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          ML engineer building AI solutions for Aqua Robotics—automating fish farming at sea with computer vision, predictive maintenance, and robotic systems. Former Sub-Team Lead of BRACU DUBURI. Research focus: Optimal Transport GANs for medical image augmentation.
+          ML engineer at Cefalo building production AI systems—currently developing ML models for BioDrone&apos;s aerial image analysis in forestry and agriculture. Past work includes computer vision for Aqua Robotics, generative AI with Vertex AI and LangChain, and real-time pricing engines. Former Sub-Team Lead of BRACU DUBURI. Research focus: Optimal Transport GANs for medical image augmentation.
         </motion.p>
         <motion.div
           className="flex flex-wrap items-center justify-center gap-4"

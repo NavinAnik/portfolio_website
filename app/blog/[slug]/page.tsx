@@ -36,11 +36,11 @@ const placeholderPosts: Record<
 };
 
 interface BlogPostProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: BlogPostProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = placeholderPosts[slug];
   if (!post) return { title: "Post not found" };
   return {
@@ -49,8 +49,8 @@ export async function generateMetadata({ params }: BlogPostProps) {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostProps) {
-  const { slug } = params;
+export default async function BlogPostPage({ params }: BlogPostProps) {
+  const { slug } = await params;
   const post = placeholderPosts[slug];
   if (!post) notFound();
 

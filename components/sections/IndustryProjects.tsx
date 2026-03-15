@@ -38,6 +38,14 @@ export default function IndustryProjects() {
               <h3 className="font-serif text-xl font-normal" style={{ color: "var(--color-text-strong)" }}>
                 {p.title}
               </h3>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 mb-3">
+                <span className="text-xs font-medium" style={{ color: "var(--color-accent)" }}>
+                  {p.role}
+                </span>
+                <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>
+                  {p.duration}
+                </span>
+              </div>
               <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--color-text-muted)" }}>
                 {p.description}
               </p>

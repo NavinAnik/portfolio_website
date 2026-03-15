@@ -6,7 +6,7 @@ import SkillCard from "@/components/ui/SkillCard";
 import skillsData from "@/content/skills.json";
 
 export default function Skills() {
-  const { languages, mlDl, mlops, data } = skillsData;
+  const { languages, mlDl, cloudMlops, dataAnalytics, databases, webDevTools } = skillsData;
 
   return (
     <section
@@ -20,10 +20,10 @@ export default function Skills() {
           id="skills-heading"
           label="04 — Skills"
           title="Technical Skills"
-          subtitle="Languages, ML/DL frameworks, MLOps, and data tools."
+          subtitle="Languages, ML/DL frameworks, cloud & MLOps, data analytics, databases, and web dev tools."
         />
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -31,8 +31,10 @@ export default function Skills() {
         >
           <SkillCard category="Languages" items={languages} />
           <SkillCard category="ML / DL" items={mlDl} />
-          <SkillCard category="MLOps" items={mlops} />
-          <SkillCard category="Data" items={data} />
+          <SkillCard category="Cloud / MLOps" items={cloudMlops} />
+          <SkillCard category="Data / Analytics" items={dataAnalytics} />
+          <SkillCard category="Databases" items={databases} />
+          <SkillCard category="Web / Dev Tools" items={webDevTools} />
         </motion.div>
       </div>
     </section>

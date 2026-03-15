@@ -1,5 +1,7 @@
 import researchData from "@/content/research.json";
 
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://navinnayeranik.com";
+
 export const GOOGLE_SCHOLAR_URL = researchData.googleScholarUrl;
 
 export const SOCIAL_LINKS = [

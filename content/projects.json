@@ -1,17 +1,48 @@
 {
   "industry": [
     {
-      "title": "Image Classification for Aqua Robotics Maintenance",
-      "description": "Built end-to-end classification system for Aqua Robotics' maintenance robots that clean fishing plant nets. Detects both growth and hole classes in underwater imagery. Deployed on AWS using Terraform for infrastructure; employs AWS Lambda and Apache Spark for scalable data processing.",
-      "tech": ["Python", "PyTorch", "TensorFlow", "AWS", "Terraform", "Lambda", "Apache Spark", "Computer Vision"],
-      "metrics": ["Real-time detection for underwater nets", "Scalable data processing pipeline"],
+      "title": "BioDrone",
+      "role": "Associate Software Engineer II, AI/ML",
+      "duration": "Dec 2025 — Present",
+      "description": "Worked with Biodrone, a Norway-based company specializing in advanced drone services and AI-driven aerial image analysis for forestry and agricultural applications. Contributing to the development and integration of machine learning models within the Biodrone Portal.",
+      "tech": ["PyTorch", "CNN", "Transformers", "Machine Vision", "SageMaker", "Docker", "GitHub Actions", "Distributed Training", "AWS S3", "EventBridge", "3LC"],
+      "metrics": ["ML model integration for aerial image analysis", "End-to-end pipeline on AWS with SageMaker and distributed training"],
       "link": null
     },
     {
-      "title": "ML for Offshore Fish Farm Automation",
-      "description": "Designed ML algorithms to optimize maintenance for offshore fish farms. Implemented computer vision models to monitor fish health, detect anomalies, and ensure optimal conditions. Integrated AI-driven insights into robotic systems for cleaning and inspecting underwater facilities.",
-      "tech": ["Python", "PyTorch", "TensorFlow", "Computer Vision", "Docker", "AWS"],
-      "metrics": ["Predictive maintenance in marine environments", "Real-time anomaly detection"],
+      "title": "Dobee",
+      "role": "Associate Software Engineer II, AI/ML",
+      "duration": "Sep 2025 — Dec 2025",
+      "description": "Worked with Dobee on a Generative AI project focused on building an intelligent and interactive story generation system. Designed an end-to-end pipeline to fetch raw data from BigQuery, use an AI model to generate insightful summaries and stories, and store the outputs in Firestore. Implemented a chatbot interface where users can provide additional context, allowing the system to regenerate more refined and context-aware stories dynamically.",
+      "tech": ["Vertex AI", "LangChain", "BigQuery", "Firestore", "TypeScript", "Bitbucket"],
+      "metrics": ["Generative AI-powered interactive story generation", "Iterative context-aware content refinement via chatbot"],
+      "link": null
+    },
+    {
+      "title": "TicketCo Data",
+      "role": "Associate Software Engineer II, AI/ML",
+      "duration": "Jul 2025 — Sep 2025",
+      "description": "Worked with TicketCo Data on a proof-of-concept project to develop a static rule engine designed to maximize ticket sales profit based on configurable business rules. Implemented a system leveraging NATS for real-time data streaming to publish and receive recommended ticket prices dynamically. Designed the architectural blueprint for a future dynamic AI-driven rule engine utilizing time series forecasting.",
+      "tech": ["FastAPI", "NATS", "Python", "Microservices Architecture", "Distributed Message Queues", "Git"],
+      "metrics": ["Real-time dynamic pricing via NATS streaming", "Scalable architecture for future AI-driven pricing engine"],
+      "link": null
+    },
+    {
+      "title": "AquaRobotics",
+      "role": "Associate Software Engineer, AI/ML",
+      "duration": "Feb 2024 — Jul 2025",
+      "description": "Worked with Aqua Robotics, a Norway-based company providing robotic solutions for sea fish farming. Developed an image classification model for their underwater rover, addressing issues like overfitting and bias. Designed and implemented a GAN model to generate synthetic data, improving model performance. Integrated CI/CD pipelines using GitHub, Docker, and SageMaker Spot Instances, reducing training costs by up to 70%. Worked on distributed training to scale up training machines while minimizing cost.",
+      "tech": ["PyTorch", "CNN", "GANs", "SageMaker", "Docker", "GitHub Actions", "Distributed Training", "Spot Instances", "AWS S3", "EventBridge", "3LC"],
+      "metrics": ["Reduced training costs by up to 70% via Spot Instances", "Synthetic data generation with GANs to improve model performance", "Scalable distributed training pipeline"],
+      "link": null
+    },
+    {
+      "title": "Blogging Website (Full-Stack)",
+      "role": "Junior Software Developer",
+      "duration": "Sep 2023 — Feb 2024",
+      "description": "Built a full-stack blogging platform featuring JWT authentication for enhanced security. Users can create profiles, manage personal information, and securely update passwords. Registered users can create, update, and delete blogs, while all users can read and explore categorized blogs. Unit tests implemented for both frontend and backend components.",
+      "tech": ["Express.js", "Sequelize", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "React Router", "Jest"],
+      "metrics": ["JWT-based secure authentication", "Full CRUD operations with role-based access", "Comprehensive unit test coverage"],
       "link": null
     }
   ]

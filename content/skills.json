@@ -1,6 +1,8 @@
 {
-  "languages": ["Python", "JavaScript", "TypeScript", "Java", "HTML", "CSS", "Bash"],
-  "mlDl": ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "OpenCV", "Computer Vision", "Transfer Learning"],
-  "mlops": ["Docker", "AWS", "Terraform", "Lambda", "Apache Spark", "Git", "CI/CD"],
-  "data": ["Pandas", "NumPy", "SQL", "MySQL"]
+  "languages": ["Python", "JavaScript", "TypeScript", "Java", "Bash"],
+  "mlDl": ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "OpenCV", "GANs", "Transformers", "Computer Vision", "Transfer Learning"],
+  "cloudMlops": ["AWS", "SageMaker", "GCP", "Docker", "Lambda", "EventBridge", "CloudWatch", "Distributed Training", "Spot Instances", "CI/CD", "3LC", "Google Colab"],
+  "dataAnalytics": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Apache Spark"],
+  "databases": ["SQL", "MySQL", "MongoDB", "Firebase", "BigQuery"],
+  "webDevTools": ["Node.js", "Express.js", "React.js", "Redux Toolkit", "Tailwind CSS", "REST APIs", "Jest", "Git", "Bitbucket", "ROS"]
 }

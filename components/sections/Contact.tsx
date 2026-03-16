@@ -78,7 +78,7 @@ export default function Contact() {
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="contact-heading"
-          label="05 — Contact"
+          label="06 — Contact"
           title="Get In Touch"
           subtitle="Interested in collaboration, research, or opportunities? Let's connect."
         />

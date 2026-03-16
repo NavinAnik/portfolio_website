@@ -1,0 +1,56 @@
+[
+  {
+    "title": "Software Engineer I, AI/ML",
+    "company": "Cefalo",
+    "location": "Dhaka, Bangladesh (Remote for Norway-based clients)",
+    "duration": "Feb 2024 — Present",
+    "description": "Building production ML systems for international clients in aerial imaging, underwater robotics, generative AI, and real-time pricing.",
+    "highlights": [
+      "BioDrone — ML model integration for AI-driven aerial image analysis in forestry and agriculture using PyTorch, SageMaker, and distributed training",
+      "Dobee — Built a Generative AI story generation system with Vertex AI, LangChain, BigQuery, and Firestore",
+      "TicketCo Data — Designed a real-time pricing engine using FastAPI, NATS streaming, and microservices architecture",
+      "AquaRobotics — Developed underwater image classification and GAN-based synthetic data generation, reducing training costs by 70% via Spot Instances"
+    ]
+  },
+  {
+    "title": "Junior Software Developer",
+    "company": "Cefalo",
+    "location": "Dhaka, Bangladesh",
+    "duration": "Sep 2023 — Feb 2024",
+    "description": "Full-stack development with a focus on building secure, tested web applications.",
+    "highlights": [
+      "Built a full-stack blogging platform with JWT authentication, role-based access, and comprehensive unit testing",
+      "Worked with React, TypeScript, Express.js, Redux Toolkit, and Tailwind CSS"
+    ]
+  },
+  {
+    "title": "Sub-Team Lead",
+    "company": "BRACU DUBURI",
+    "location": "BRAC University, Dhaka",
+    "duration": "2019 — 2023",
+    "description": "Led the software sub-team for Bangladesh's first autonomous underwater vehicle (AUV).",
+    "highlights": [
+      "Developed transfer-learning-based object detection for the underwater rover using Jetson Nano",
+      "RoboSub USA 2022 — Top 10 Semifinalist & Outstanding Rookie Team"
+    ]
+  },
+  {
+    "title": "Machine Vision Engineer",
+    "company": "Anusondhani Lab",
+    "location": "BRAC University, Dhaka",
+    "duration": "2021 — 2023",
+    "description": "Research and development in computer vision and deep learning for academic projects.",
+    "highlights": [
+      "CNNs, transformers, and transfer learning for underwater and medical imagery",
+      "4th IR Conference 2021 — Top 5 Industrial Projects"
+    ]
+  },
+  {
+    "title": "Undergraduate Teaching Assistant",
+    "company": "BRAC University",
+    "location": "Dhaka, Bangladesh",
+    "duration": "2020 — 2023",
+    "description": "Assisted faculty in teaching computer science courses and mentoring students.",
+    "highlights": []
+  }
+]

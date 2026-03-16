@@ -10,6 +10,7 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/Sheet";
 
 const SECTION_IDS = [
   "about",
+  "experience",
   "projects",
   "research",
   "skills",
@@ -18,6 +19,7 @@ const SECTION_IDS = [
 
 const navLinks = [
   { href: "#about", label: "About", id: "about" },
+  { href: "#experience", label: "Experience", id: "experience" },
   { href: "#projects", label: "Projects", id: "projects" },
   { href: "#research", label: "Research", id: "research" },
   { href: "#skills", label: "Skills", id: "skills" },

@@ -40,7 +40,7 @@ export default function Research() {
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="research-heading"
-          label="03 — Research"
+          label="04 — Research"
           title="Research & Publications"
           subtitle="Projects, papers, and academic participation."
         />

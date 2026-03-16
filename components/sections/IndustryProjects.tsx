@@ -20,7 +20,7 @@ export default function IndustryProjects() {
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="projects-heading"
-          label="02 — Projects"
+          label="03 — Projects"
           title="Industry Projects"
           subtitle="AI/ML production systems and real-world impact."
         />

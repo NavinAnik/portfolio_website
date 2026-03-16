@@ -19,9 +19,9 @@ const bodyFont = Inter({
 });
 
 const FULL_NAME = "S. M. Navin Nayer Anik";
-const TITLE = `${FULL_NAME} | Associate Software Engineer II, AI/ML`;
+const TITLE = `${FULL_NAME} | Software Engineer I, AI/ML`;
 const DESCRIPTION =
-  "Associate Software Engineer II, AI/ML at Cefalo. Building production ML systems for BioDrone (aerial image analysis), Aqua Robotics (underwater computer vision), and generative AI pipelines. Former BRACU DUBURI Sub-Team Lead. Research focus: Optimal Transport GANs for medical image augmentation.";
+  "Software Engineer I, AI/ML at Cefalo. Building production ML systems for BioDrone (aerial image analysis), Aqua Robotics (underwater computer vision), and generative AI pipelines. Former BRACU DUBURI Sub-Team Lead. Research focus: Optimal Transport GANs for medical image augmentation.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -107,7 +107,7 @@ const jsonLd = {
       "@id": `${SITE_URL}/#person`,
       name: FULL_NAME,
       url: SITE_URL,
-      jobTitle: "Associate Software Engineer II, AI/ML",
+      jobTitle: "Software Engineer I, AI/ML",
       worksFor: {
         "@type": "Organization",
         name: "Cefalo",

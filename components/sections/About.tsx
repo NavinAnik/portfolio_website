@@ -87,7 +87,7 @@ export default function About() {
                   Current role
                 </h3>
                 <p style={{ color: "var(--color-text)" }}>
-                  Associate Software Engineer II, AI/ML at Cefalo — ML for BioDrone (drone services, AI-driven aerial image analysis for forestry and agriculture)
+                  Software Engineer I, AI/ML at Cefalo — ML for BioDrone (drone services, AI-driven aerial image analysis for forestry and agriculture)
                 </p>
               </div>
               <div>

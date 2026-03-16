@@ -34,7 +34,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Associate Software Engineer II, AI/ML · Cefalo
+          Software Engineer I, AI/ML · Cefalo
         </motion.p>
         <motion.h1
           className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-heading-tight mb-4"

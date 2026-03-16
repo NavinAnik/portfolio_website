@@ -1,22 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { BookOpen, FileText, Users, ExternalLink } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
-import Button from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { fadeInUp, staggerContainer, viewportConfig } from "@/lib/animations";
 import researchData from "@/content/research.json";
+import Link from "next/link";
 
 type TabId = "projects" | "papers" | "conferences";
+
+const tabs: { id: TabId; label: string; icon: React.ReactNode }[] = [
+  { id: "projects", label: "Research Projects", icon: <BookOpen className="h-4 w-4" /> },
+  { id: "papers", label: "Papers", icon: <FileText className="h-4 w-4" /> },
+  { id: "conferences", label: "Conferences", icon: <Users className="h-4 w-4" /> },
+];
+
+function BookOpenIcon(props: React.SVGProps<SVGSVGElement>) {
+  return <BookOpen {...(props as React.ComponentProps<typeof BookOpen>)} />;
+}
 
 export default function Research() {
   const { projects, papers, conferences, googleScholarUrl } = researchData;
   const [activeTab, setActiveTab] = useState<TabId>("projects");
-
-  const tabs: { id: TabId; label: string }[] = [
-    { id: "projects", label: "Research Projects" },
-    { id: "papers", label: "Papers" },
-    { id: "conferences", label: "Conferences" },
-  ];
 
   const hasPublished = papers.published.length > 0;
   const hasUnderReview = papers.underReview.length > 0;
@@ -26,11 +34,10 @@ export default function Research() {
   return (
     <section
       id="research"
-      className="py-20 md:py-28 px-6 border-t bg-white"
-      style={{ borderColor: "var(--color-border)" }}
+      className="py-20 md:py-28 px-6"
       aria-labelledby="research-heading"
     >
-      <div className="max-w-content mx-auto">
+      <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="research-heading"
           label="03 — Research"
@@ -39,174 +46,192 @@ export default function Research() {
         />
 
         <motion.div
-          className="space-y-6"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
+          className="space-y-8"
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
         >
-          <div
-            role="tablist"
-            aria-label="Research content tabs"
-            className="flex flex-wrap gap-2 border-b pb-2"
-            style={{ borderColor: "var(--color-border)" }}
-          >
-            {tabs.map(({ id, label }) => (
-              <button
-                key={id}
-                role="tab"
-                aria-selected={activeTab === id}
-                aria-controls={`panel-${id}`}
-                id={`tab-${id}`}
-                onClick={() => setActiveTab(id)}
-                className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${
-                  activeTab === id
-                    ? "bg-white border border-b-white -mb-[2px] text-accent"
-                    : "hover:bg-surface-muted"
-                }`}
-                style={{
-                  borderColor: activeTab === id ? "var(--color-border)" : "transparent",
-                  color: activeTab === id ? undefined : "var(--color-text-muted)",
-                }}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-
-          <div
-            id="panel-projects"
-            role="tabpanel"
-            aria-labelledby="tab-projects"
-            hidden={activeTab !== "projects"}
-            className="pt-2"
-          >
-            <ul className="space-y-4">
-              {projects.map((p, i) => (
-                <li
-                  key={i}
-                  className="rounded-xl border bg-white p-5 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5"
-                  style={{ borderColor: "var(--color-border)" }}
+          {/* Tab triggers */}
+          <motion.div variants={fadeInUp}>
+            <div
+              role="tablist"
+              aria-label="Research content tabs"
+              className="inline-flex items-center gap-1 rounded-lg bg-muted p-1"
+            >
+              {tabs.map(({ id, label, icon }) => (
+                <button
+                  key={id}
+                  role="tab"
+                  aria-selected={activeTab === id}
+                  aria-controls={`panel-${id}`}
+                  id={`tab-${id}`}
+                  onClick={() => setActiveTab(id)}
+                  className={`relative inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    activeTab === id
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
-                  {"link" in p && p.link ? (
-                    <a
-                      href={p.link}
-                      className="font-medium text-accent hover:underline block"
-                    >
-                      {p.title}
-                    </a>
-                  ) : (
-                    <p className="font-medium" style={{ color: "var(--color-text-strong)" }}>{p.title}</p>
-                  )}
-                  <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>{p.description}</p>
-                  <p className="text-xs mt-2" style={{ color: "var(--color-text-muted)" }}>{p.year}</p>
-                </li>
+                  {icon}
+                  <span className="hidden sm:inline">{label}</span>
+                </button>
               ))}
-            </ul>
-          </div>
+            </div>
+          </motion.div>
 
-          <div
-            id="panel-papers"
-            role="tabpanel"
-            aria-labelledby="tab-papers"
-            hidden={activeTab !== "papers"}
-            className="pt-2"
-          >
-            {!hasPapers ? (
-              <p style={{ color: "var(--color-text-muted)" }}>No papers listed yet.</p>
-            ) : (
-              <div className="space-y-6">
-                {hasPublished && (
-                  <div>
-                    <h4 className="text-sm font-medium uppercase tracking-wide mb-2" style={{ color: "var(--color-text-muted)" }}>
-                      Published
-                    </h4>
-                    <ul className="space-y-3">
-                      {papers.published.map((paper: { title: string; authors: string; venue: string; year: string; link?: string | null }, i: number) => (
-                        <li key={i} className="border-l-2 pl-4" style={{ borderColor: "var(--color-border-strong)" }}>
-                          {paper.link ? (
+          {/* Tab content with AnimatePresence */}
+          <AnimatePresence mode="wait">
+            {activeTab === "projects" && (
+              <motion.div
+                key="projects"
+                id="panel-projects"
+                role="tabpanel"
+                aria-labelledby="tab-projects"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="grid gap-4">
+                  {projects.map((p, i) => (
+                    <div
+                      key={i}
+                      className="group rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          {"link" in p && p.link ? (
                             <a
-                              href={paper.link}
-                              className="text-accent hover:underline font-medium"
+                              href={p.link}
+                              className="font-medium text-primary hover:underline inline-flex items-center gap-1"
                             >
-                              {paper.title}
+                              {p.title}
+                              <ExternalLink className="h-3 w-3" />
                             </a>
                           ) : (
-                            <p className="font-medium" style={{ color: "var(--color-text-strong)" }}>{paper.title}</p>
+                            <p className="font-medium">{p.title}</p>
                           )}
-                          <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                            {paper.authors}. {paper.venue}, {paper.year}.
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {hasUnderReview && (
-                  <div>
-                    <h4 className="text-sm font-medium uppercase tracking-wide mb-2" style={{ color: "var(--color-text-muted)" }}>
-                      Under review
-                    </h4>
-                    <ul className="space-y-3">
-                      {papers.underReview.map((paper: { title: string; authors: string; venue: string; year: string }, i: number) => (
-                        <li key={i} className="border-l-2 pl-4" style={{ borderColor: "var(--color-border-strong)" }}>
-                          <p className="font-medium" style={{ color: "var(--color-text-strong)" }}>{paper.title}</p>
-                          <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                            {paper.authors}. {paper.venue}, {paper.year}.
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {hasInProgress && (
-                  <div>
-                    <h4 className="text-sm font-medium uppercase tracking-wide mb-2" style={{ color: "var(--color-text-muted)" }}>
-                      In progress
-                    </h4>
-                    <ul className="space-y-3">
-                      {papers.inProgress.map((paper: { title: string; authors: string; venue: string; year: string }, i: number) => (
-                        <li key={i} className="border-l-2 pl-4" style={{ borderColor: "var(--color-border-strong)" }}>
-                          <p className="font-medium" style={{ color: "var(--color-text-strong)" }}>{paper.title}</p>
-                          <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                            {paper.authors}. {paper.venue} {paper.year}.
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+                          <p className="text-sm mt-1 text-muted-foreground">{p.description}</p>
+                        </div>
+                        <Badge variant="secondary" className="text-xs shrink-0">
+                          {p.year}
+                        </Badge>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             )}
-          </div>
 
-          <div
-            id="panel-conferences"
-            role="tabpanel"
-            aria-labelledby="tab-conferences"
-            hidden={activeTab !== "conferences"}
-            className="pt-2"
-          >
-            <ul className="flex flex-wrap gap-3">
-              {conferences.map((c, i) => (
-                <li
-                  key={i}
-                  className="px-4 py-2 rounded-xl bg-white border text-sm shadow-card"
-                  style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}
-                >
-                  {c.name} {c.year} — {c.role}
-                </li>
-              ))}
-            </ul>
-          </div>
+            {activeTab === "papers" && (
+              <motion.div
+                key="papers"
+                id="panel-papers"
+                role="tabpanel"
+                aria-labelledby="tab-papers"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+              >
+                {!hasPapers ? (
+                  <p className="text-muted-foreground">No papers listed yet.</p>
+                ) : (
+                  <div className="space-y-6">
+                    {hasPublished && (
+                      <PaperGroup title="Published" variant="success" papers={papers.published} />
+                    )}
+                    {hasUnderReview && (
+                      <PaperGroup title="Under Review" variant="warning" papers={papers.underReview} />
+                    )}
+                    {hasInProgress && (
+                      <PaperGroup title="In Progress" variant="info" papers={papers.inProgress} />
+                    )}
+                  </div>
+                )}
+              </motion.div>
+            )}
 
-          <div>
-            <Button href={googleScholarUrl} variant="outline" external>
-              Google Scholar
+            {activeTab === "conferences" && (
+              <motion.div
+                key="conferences"
+                id="panel-conferences"
+                role="tabpanel"
+                aria-labelledby="tab-conferences"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {conferences.map((c, i) => (
+                    <div
+                      key={i}
+                      className="rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="secondary" className="text-[10px]">{c.year}</Badge>
+                      </div>
+                      <p className="font-medium text-sm">{c.name}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{c.role}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <motion.div variants={fadeInUp}>
+            <Button variant="outline" asChild>
+              <Link href={googleScholarUrl} target="_blank" rel="noopener noreferrer">
+                <BookOpen className="h-4 w-4" />
+                Google Scholar
+              </Link>
             </Button>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function PaperGroup({
+  title,
+  variant,
+  papers,
+}: {
+  title: string;
+  variant: "success" | "warning" | "info";
+  papers: { title: string; authors: string; venue: string; year: string; link?: string | null }[];
+}) {
+  return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <Badge variant={variant} className="text-[10px]">{title}</Badge>
+      </div>
+      <div className="space-y-3">
+        {papers.map((paper, i) => (
+          <div
+            key={i}
+            className="border-l-2 border-border pl-4 hover:border-primary transition-colors"
+          >
+            {paper.link ? (
+              <a
+                href={paper.link}
+                className="text-primary hover:underline font-medium text-sm"
+              >
+                {paper.title}
+              </a>
+            ) : (
+              <p className="font-medium text-sm">{paper.title}</p>
+            )}
+            <p className="text-xs text-muted-foreground mt-1">
+              {paper.authors}. {paper.venue}, {paper.year}.
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/providers/MotionProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import BackToTop from "@/components/ui/BackToTop";
 import { SITE_URL, SOCIAL_LINKS, GOOGLE_SCHOLAR_URL } from "@/lib/constants";
 
 const headingFont = Instrument_Serif({
@@ -16,6 +18,12 @@ const bodyFont = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
+});
+
+const codeFont = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-code",
 });
 
 const FULL_NAME = "S. M. Navin Nayer Anik";
@@ -150,26 +158,27 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${headingFont.variable} ${bodyFont.variable}`}
+      className={`${headingFont.variable} ${bodyFont.variable} ${codeFont.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <MotionProvider>
-          <a
-            href="#main-content"
-            className="skip-link"
-          >
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" className="flex-1" tabIndex={-1}>
-            {children}
-          </main>
-          <Footer />
-        </MotionProvider>
+        <ThemeProvider>
+          <MotionProvider>
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+            <Header />
+            <main id="main-content" className="flex-1" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+            <BackToTop />
+          </MotionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

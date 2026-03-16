@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import {
+  GraduationCap,
+  Briefcase,
+  Award,
+  FlaskConical,
+  ShieldCheck,
+} from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { Badge } from "@/components/ui/Badge";
+import { staggerContainer, fadeInUp, fadeInLeft, fadeInRight, viewportConfig } from "@/lib/animations";
 
-const PROFILE_IMAGE = "/images/profile.png";
-const PROFILE_FALLBACK = "https://picsum.photos/seed/profile/400/400";
+const PROFILE_IMAGE = "/images/profile.webp";
+const PROFILE_FALLBACK = "/images/profile.png";
 
 const RESEARCH_INTERESTS = [
   "Computer vision",
@@ -15,13 +24,55 @@ const RESEARCH_INTERESTS = [
   "Optimal transport theory",
   "Medical image analysis",
   "Transfer learning",
+  "Robotics",
 ];
 
 const RECOGNITION = [
-  "RoboSub USA 2022 — Top 10 Semifinalist & Outstanding Rookie Team",
-  "4th IR Conference 2021 — Top 5 Industrial Projects",
-  "Dean's List & VC's List — 5×",
+  {
+    title: "RoboSub USA 2022",
+    detail: "Top 10 Semifinalist & Outstanding Rookie Team",
+  },
+  {
+    title: "4th IR Conference 2021",
+    detail: "Top 5 Industrial Projects",
+  },
+  {
+    title: "Dean's List & VC's List",
+    detail: "5x recipient",
+  },
 ];
+
+const STATS = [
+  { label: "Years Experience", value: 3 },
+  { label: "Industry Projects", value: 5 },
+  { label: "Research Papers", value: 4 },
+];
+
+function AnimatedCounter({ value }: { value: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function step(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      start = Math.floor(eased * value);
+      setCount(start);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }, [inView, value]);
+
+  return <span ref={ref}>{count}+</span>;
+}
 
 export default function About() {
   const [imgError, setImgError] = useState(false);
@@ -30,11 +81,10 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-20 md:py-28 px-6 border-t bg-white"
-      style={{ borderColor: "var(--color-border)" }}
+      className="py-20 md:py-28 px-6"
       aria-labelledby="about-heading"
     >
-      <div className="max-w-content mx-auto">
+      <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="about-heading"
           label="01 — About"
@@ -43,128 +93,136 @@ export default function About() {
         />
 
         <motion.div
-          className="space-y-10 md:space-y-12"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
+          className="space-y-8"
+          variants={staggerContainer(0.12)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
         >
-          {/* Profile card: photo + credentials */}
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-            <div className="flex-shrink-0 mx-auto md:mx-0">
-              <div className="relative w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden ring-4 ring-slate-100 shadow-lg">
-                <Image
-                  src={profileSrc}
-                  alt="S. M. Navin Nayer Anik"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 176px, 224px"
-                  priority
-                  onError={() => setImgError(true)}
-                />
+          {/* Top row: Profile + Credentials */}
+          <div className="grid md:grid-cols-[280px_1fr] gap-8">
+            {/* Profile card */}
+            <motion.div variants={fadeInLeft} className="flex flex-col items-center md:items-start gap-6">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary/40 via-primary/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity blur-sm" />
+                <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden ring-2 ring-border">
+                  <Image
+                    src={profileSrc}
+                    alt="S. M. Navin Nayer Anik"
+                    width={448}
+                    height={672}
+                    className="object-cover w-full h-full transition-transform duration-500 will-change-transform group-hover:scale-105"
+                    sizes="(max-width: 768px) 192px, 224px"
+                    priority
+                    onError={() => setImgError(true)}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex-1 min-w-0 space-y-4">
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
-                  Education
-                </h3>
-                <p className="font-serif text-lg" style={{ color: "var(--color-text-strong)" }}>
-                  B.Sc. Computer Science & Engineering, BRAC University
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 w-full text-center">
+                {STATS.map((stat) => (
+                  <div key={stat.label}>
+                    <div className="text-2xl font-serif font-normal text-foreground">
+                      <AnimatedCounter value={stat.value} />
+                    </div>
+                    <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mt-0.5">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Credentials grid */}
+            <motion.div variants={fadeInRight} className="grid sm:grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+                <div className="flex items-center gap-2 text-primary">
+                  <GraduationCap className="h-4 w-4" />
+                  <h3 className="text-xs font-medium uppercase tracking-wider">Education</h3>
+                </div>
+                <p className="font-serif text-lg">
+                  B.Sc. Computer Science & Engineering
                 </p>
-                <p className="text-sm mt-0.5" style={{ color: "var(--color-text-muted)" }}>GPA 3.82</p>
+                <p className="text-sm text-muted-foreground">BRAC University &middot; GPA 3.82</p>
               </div>
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
-                  Thesis
-                </h3>
-                <p className="font-medium leading-relaxed" style={{ color: "var(--color-text-strong)" }}>
+
+              <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+                <div className="flex items-center gap-2 text-primary">
+                  <FlaskConical className="h-4 w-4" />
+                  <h3 className="text-xs font-medium uppercase tracking-wider">Thesis</h3>
+                </div>
+                <p className="text-sm font-medium leading-relaxed">
                   Optimal Transport Theory based GAN for Medical Image Augmentation and Classification
                 </p>
               </div>
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
-                  Current role
-                </h3>
-                <p style={{ color: "var(--color-text)" }}>
-                  Software Engineer I, AI/ML at Cefalo — ML for BioDrone (drone services, AI-driven aerial image analysis for forestry and agriculture)
+
+              <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+                <div className="flex items-center gap-2 text-primary">
+                  <Briefcase className="h-4 w-4" />
+                  <h3 className="text-xs font-medium uppercase tracking-wider">Current Role</h3>
+                </div>
+                <p className="text-sm leading-relaxed">
+                  Software Engineer I, AI/ML at Cefalo &mdash; ML for BioDrone
+                  (drone services, AI-driven aerial image analysis for forestry and agriculture)
                 </p>
               </div>
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider mb-1" style={{ color: "var(--color-text-muted)" }}>
-                  Certifications
-                </h3>
-                <ul className="space-y-1 text-sm" style={{ color: "var(--color-text)" }}>
+
+              <div className="rounded-xl border border-border bg-card p-5 space-y-3">
+                <div className="flex items-center gap-2 text-primary">
+                  <ShieldCheck className="h-4 w-4" />
+                  <h3 className="text-xs font-medium uppercase tracking-wider">Certifications</h3>
+                </div>
+                <ul className="space-y-1.5 text-sm text-muted-foreground">
                   <li className="flex gap-2">
-                    <span className="mt-0.5" style={{ color: "var(--color-text-muted)" }}>•</span>
-                    <span>OWASP Top 10 for Large Language Model Applications — SecureFlag</span>
+                    <span className="text-primary/50 mt-0.5">&bull;</span>
+                    <span>OWASP Top 10 for LLMs &mdash; SecureFlag</span>
                   </li>
                   <li className="flex gap-2">
-                    <span className="mt-0.5" style={{ color: "var(--color-text-muted)" }}>•</span>
-                    <span>AI for All: From Basics to GenAI Practice — NVIDIA</span>
+                    <span className="text-primary/50 mt-0.5">&bull;</span>
+                    <span>AI for All: From Basics to GenAI &mdash; NVIDIA</span>
                   </li>
                 </ul>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Research interests */}
-            <div>
-              <h3 className="text-sm font-medium uppercase tracking-wider mb-3" style={{ color: "var(--color-text-muted)" }}>
-                Research interests
-              </h3>
-            <ul className="flex flex-wrap gap-2">
+          <motion.div variants={fadeInUp}>
+            <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">
+              Research Interests
+            </h3>
+            <div className="flex flex-wrap gap-2">
               {RESEARCH_INTERESTS.map((interest) => (
-                <li key={interest}>
-                  <span className="inline-block px-3 py-1.5 text-sm rounded-full transition-colors hover:bg-accent/10"
-                    style={{ color: "var(--color-text)", backgroundColor: "var(--color-surface-muted)" }}
-                  >
-                    {interest}
-                  </span>
-                </li>
+                <Badge
+                  key={interest}
+                  variant="secondary"
+                  className="px-3 py-1.5 text-sm hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
+                >
+                  {interest}
+                </Badge>
               ))}
-            </ul>
-          </div>
+            </div>
+          </motion.div>
 
-          {/* Experience & recognition: two-column layout */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-            <div>
-              <h3 className="text-sm font-medium uppercase tracking-wider mb-3" style={{ color: "var(--color-text-muted)" }}>
-                Experience
-              </h3>
-              <ul className="space-y-2 text-sm leading-relaxed" style={{ color: "var(--color-text)" }}>
-                <li className="flex gap-2">
-                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
-                  <span>Sub-Team Lead, BRACU DUBURI — Bangladesh&apos;s first autonomous underwater vehicle</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
-                  <span>Machine Vision Engineer, Anusondhani Lab</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
-                  <span>Undergraduate Teaching Assistant, BRAC University</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-1.5" style={{ color: "var(--color-text-muted)" }}>•</span>
-                  <span>CNNs, transformers, transfer learning for underwater and medical imagery</span>
-                </li>
-              </ul>
+          {/* Recognition */}
+          <motion.div variants={fadeInUp}>
+            <div className="flex items-center gap-2 text-muted-foreground mb-4">
+              <Award className="h-4 w-4 text-primary" />
+              <h3 className="text-xs font-medium uppercase tracking-wider">Recognition</h3>
             </div>
-            <div>
-              <h3 className="text-sm font-medium uppercase tracking-wider mb-3" style={{ color: "var(--color-text-muted)" }}>
-                Recognition
-              </h3>
-              <ul className="space-y-2 text-sm" style={{ color: "var(--color-text)" }}>
-                {RECOGNITION.map((item, i) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="shrink-0 mt-1" style={{ color: "var(--color-text-muted)" }}>•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {RECOGNITION.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-xl border border-border bg-card p-4 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <p className="font-medium text-sm">{item.title}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{item.detail}</p>
+                </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

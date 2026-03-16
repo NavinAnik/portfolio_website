@@ -1,7 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { Badge } from "@/components/ui/Badge";
+import { staggerContainer, fadeInUp, viewportConfig } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 import projectsData from "@/content/projects.json";
 
 export default function IndustryProjects() {
@@ -10,77 +14,85 @@ export default function IndustryProjects() {
   return (
     <section
       id="projects"
-      className="py-20 md:py-28 px-6 border-t bg-surface-muted"
-      style={{ borderColor: "var(--color-border)" }}
+      className="py-20 md:py-28 px-6 bg-muted/50"
       aria-labelledby="projects-heading"
     >
-      <div className="max-w-content mx-auto">
+      <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="projects-heading"
           label="02 — Projects"
           title="Industry Projects"
           subtitle="AI/ML production systems and real-world impact."
         />
+
         <motion.div
-          className="grid md:grid-cols-2 gap-6"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-2 gap-5"
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
         >
           {projects.map((p, i) => (
-            <article
+            <motion.article
               key={i}
-              className="group relative rounded-xl border bg-white p-6 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5"
-              style={{ borderColor: "var(--color-border)" }}
+              variants={fadeInUp}
+              className={cn(
+                "group relative rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1",
+                i === 0 && "md:col-span-2"
+              )}
             >
-              <div className="absolute left-0 top-6 bottom-6 w-1 rounded-r-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
-              <h3 className="font-serif text-xl font-normal" style={{ color: "var(--color-text-strong)" }}>
+              {/* Gradient accent on hover */}
+              <div className="absolute left-0 top-6 bottom-6 w-1 rounded-r-full bg-gradient-to-b from-primary to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
+
+              {/* Role + Duration badge */}
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <Badge variant="info" className="text-[10px] font-medium">
+                  {p.role}
+                </Badge>
+                <span className="text-xs text-muted-foreground">{p.duration}</span>
+              </div>
+
+              <h3 className="font-serif text-xl md:text-2xl font-normal mb-2 group-hover:text-primary transition-colors">
                 {p.title}
               </h3>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 mb-3">
-                <span className="text-xs font-medium" style={{ color: "var(--color-accent)" }}>
-                  {p.role}
-                </span>
-                <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>
-                  {p.duration}
-                </span>
-              </div>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--color-text-muted)" }}>
+
+              <p className="text-sm leading-relaxed text-muted-foreground mb-4">
                 {p.description}
               </p>
-              <div className="flex flex-wrap gap-2 mb-4">
+
+              {/* Tech badges */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
                 {p.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 text-xs rounded-full"
-                    style={{ color: "var(--color-text)", backgroundColor: "var(--color-surface-muted)" }}
-                  >
+                  <Badge key={t} variant="secondary" className="text-[10px] font-mono">
                     {t}
-                  </span>
+                  </Badge>
                 ))}
               </div>
-              <ul className="text-sm space-y-1 mb-4" style={{ color: "var(--color-text-muted)" }}>
+
+              {/* Metrics */}
+              <ul className="text-sm space-y-1 text-muted-foreground mb-4">
                 {p.metrics.map((m, j) => (
-                  <li key={j} className="flex items-center gap-2">
-                    <span className="text-slate-400">•</span> {m}
+                  <li key={j} className="flex items-start gap-2">
+                    <span className="text-primary/60 mt-0.5">&bull;</span>
+                    <span>{m}</span>
                   </li>
                 ))}
               </ul>
+
+              {/* Link */}
               {"link" in p && p.link && (
                 <a
                   href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-dark transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline group/link"
                 >
+                  <ExternalLink className="h-3.5 w-3.5" />
                   More details
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                  <ArrowUpRight className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                 </a>
               )}
-            </article>
+            </motion.article>
           ))}
         </motion.div>
       </div>

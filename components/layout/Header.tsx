@@ -3,15 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Menu } from "lucide-react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/Sheet";
 
-const SECTION_IDS = ["about", "research", "projects", "skills", "blog", "contact"] as const;
+const SECTION_IDS = [
+  "about",
+  "projects",
+  "research",
+  "skills",
+  "contact",
+] as const;
 
 const navLinks = [
   { href: "#about", label: "About", id: "about" },
-  { href: "#research", label: "Research", id: "research" },
   { href: "#projects", label: "Projects", id: "projects" },
+  { href: "#research", label: "Research", id: "research" },
   { href: "#skills", label: "Skills", id: "skills" },
-  { href: "#blog", label: "Blog", id: "blog" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
 
@@ -20,11 +29,21 @@ export default function Header() {
   const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     if (!isHome) return;
 
     const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
       const viewportTop = window.scrollY + 150;
       let current: string | null = null;
       for (const id of SECTION_IDS) {
@@ -44,116 +63,84 @@ export default function Header() {
   const getNavHref = (hash: string) => (isHome ? hash : `/${hash}`);
 
   return (
-    <header
-      className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b"
-      style={{ borderColor: "var(--color-border)" }}
-    >
-      <nav
-        className="max-w-content mx-auto px-6 py-4 flex items-center justify-between"
-        aria-label="Main navigation"
-      >
-        <Link
-          href="/"
-          className="font-serif text-lg font-normal tracking-heading-tight transition-colors hover:text-accent"
-          style={{ color: "var(--color-text-strong)" }}
-        >
-          Navin Nayer Anik
-        </Link>
-
-        <ul className="hidden md:flex items-center gap-1">
-          {navLinks.map(({ href, label, id }) => (
-            <li key={href}>
-              <Link
-                href={getNavHref(href)}
-                className={`relative px-3 py-2 text-xs font-medium uppercase tracking-wider transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${
-                  activeSection === id
-                    ? "text-accent"
-                    : "hover:text-accent hover:bg-surface-muted"
-                }`}
-                style={{ color: activeSection === id ? undefined : "var(--color-text-muted)" }}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link
-              href="/blog"
-              className="px-3 py-2 text-xs font-medium uppercase tracking-wider rounded-md transition-colors hover:text-accent hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              All Posts
-            </Link>
-          </li>
-        </ul>
-
-        <button
-          type="button"
-          className="md:hidden p-2 rounded-md transition-colors hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-          style={{ color: "var(--color-text)" }}
-          aria-label="Toggle menu"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden
-          >
-            {mobileOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </button>
-      </nav>
-
-      <div
-        id="mobile-menu"
-        className={`md:hidden border-t overflow-hidden transition-all duration-300 ease-out ${
-          mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+    <>
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-primary via-primary/70 to-primary"
+        style={{ scaleX }}
+      />
+      <header
+        className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+          scrolled
+            ? "bg-background/80 backdrop-blur-xl border-border shadow-sm"
+            : "bg-background/50 backdrop-blur-md border-transparent"
         }`}
-        style={{ borderColor: "var(--color-border)" }}
       >
-        <ul className="max-w-content mx-auto px-6 py-4 flex flex-col gap-1">
-          {navLinks.map(({ href, label }) => (
-            <li key={href}>
+        <nav
+          className="mx-auto max-w-[var(--content-max-width)] px-6 py-3 flex items-center justify-between"
+          aria-label="Main navigation"
+        >
+          <Link
+            href="/"
+            className="font-serif text-lg tracking-tight transition-colors hover:text-primary"
+          >
+            Navin Nayer Anik
+          </Link>
+
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map(({ href, label, id }) => (
               <Link
+                key={href}
                 href={getNavHref(href)}
-                className="block px-3 py-2 rounded-md font-medium transition-colors hover:text-accent hover:bg-surface-muted"
-                style={{ color: "var(--color-text)" }}
-                onClick={() => setMobileOpen(false)}
+                className="relative px-3 py-2 text-xs font-medium uppercase tracking-wider transition-colors rounded-md text-muted-foreground hover:text-foreground"
               >
                 {label}
+                {activeSection === id && (
+                  <motion.div
+                    className="absolute inset-x-1 -bottom-[13px] h-[2px] bg-primary rounded-full"
+                    layoutId="activeSection"
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                    }}
+                  />
+                )}
               </Link>
-            </li>
-          ))}
-          <li>
-            <Link
-              href="/blog"
-              className="block px-3 py-2 rounded-md font-medium transition-colors hover:text-accent hover:bg-surface-muted"
-              style={{ color: "var(--color-text)" }}
-              onClick={() => setMobileOpen(false)}
-            >
-              All Posts
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </header>
+            ))}
+            <div className="ml-2 pl-2 border-l border-border">
+              <ThemeToggle />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background transition-colors hover:bg-accent"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-4 w-4" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <nav className="flex flex-col gap-1 mt-8">
+                  {navLinks.map(({ href, label }) => (
+                    <Link
+                      key={href}
+                      href={getNavHref(href)}
+                      className="block px-4 py-3 rounded-lg text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 }

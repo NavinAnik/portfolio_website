@@ -3,7 +3,6 @@ import About from "@/components/sections/About";
 import Research from "@/components/sections/Research";
 import IndustryProjects from "@/components/sections/IndustryProjects";
 import Skills from "@/components/sections/Skills";
-import BlogPreview from "@/components/sections/BlogPreview";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <IndustryProjects />
       <Research />
       <Skills />
-      <BlogPreview />
       <Contact />
     </>
   );

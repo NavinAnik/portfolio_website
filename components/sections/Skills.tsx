@@ -56,7 +56,7 @@ export default function Skills() {
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="skills-heading"
-          label="05 — Skills"
+          label="06 — Skills"
           title="Technical Skills"
           subtitle="Languages, ML/DL frameworks, cloud & MLOps, data analytics, databases, and web dev tools."
         />

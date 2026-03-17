@@ -1,30 +1,4 @@
 {
-  "projects": [
-    {
-      "title": "Optimal Transport Theory-based GAN",
-      "description": "Built a GAN based on Optimal Transport theory to generate unreal datasets for improving classification model performance. Implemented in TensorFlow.",
-      "year": "2023",
-      "link": null
-    },
-    {
-      "title": "BRACU DUBURI - Autonomous Underwater Vehicle",
-      "description": "Bangladesh's first AUV. Developed transfer-learning-based object detection for the rover. Uses Jetson Nano as processing unit.",
-      "year": "2019-2023",
-      "link": null
-    },
-    {
-      "title": "Real-time Sleep Detection and Warning System",
-      "description": "Driver sleep detection system that alerts drivers when sleepy. Built with OpenCV.",
-      "year": "—",
-      "link": null
-    },
-    {
-      "title": "Sine-wave Predictor",
-      "description": "Time series prediction using Python, NumPy, Matplotlib, TensorFlow, and Scikit-learn. Sequential model with Dense and SimpleRNN layers.",
-      "year": "—",
-      "link": null
-    }
-  ],
   "papers": {
     "published": [],
     "underReview": [],

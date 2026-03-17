@@ -1,0 +1,65 @@
+[
+  {
+    "title": "BRACU DUBURI — Autonomous Underwater Vehicle",
+    "description": "Bangladesh's first autonomous underwater vehicle (AUV). Developed transfer-learning-based object detection for the rover using a Jetson Nano as the onboard processing unit. The team competed internationally, earning recognition as a top rookie team.",
+    "image": null,
+    "icon": "bot",
+    "tech": ["PyTorch", "Transfer Learning", "Jetson Nano", "OpenCV", "ROS", "Python"],
+    "highlights": [
+      "RoboSub USA 2022 — Top 10 Semifinalist & Outstanding Rookie Team",
+      "Real-time underwater object detection on edge hardware",
+      "4th IR Conference 2021 — Top 5 Industrial Projects"
+    ],
+    "github": null,
+    "demo": null,
+    "year": "2019–2023",
+    "featured": true
+  },
+  {
+    "title": "Optimal Transport Theory-based GAN",
+    "description": "Built a Generative Adversarial Network grounded in Optimal Transport theory to synthesize realistic datasets, improving downstream classification model accuracy. Thesis project exploring the intersection of mathematical theory and generative deep learning for medical image augmentation.",
+    "image": null,
+    "icon": "brain",
+    "tech": ["TensorFlow", "GANs", "Optimal Transport", "Medical Imaging", "Python", "NumPy"],
+    "highlights": [
+      "Undergraduate thesis — BRAC University",
+      "Synthetic data generation for medical image classification",
+      "Bridging mathematical theory with practical deep learning"
+    ],
+    "github": null,
+    "demo": null,
+    "year": "2023",
+    "featured": false
+  },
+  {
+    "title": "Real-time Sleep Detection & Warning System",
+    "description": "Computer vision system that monitors a driver's face in real-time and triggers an alert when signs of drowsiness are detected. Uses facial landmark detection and eye-aspect-ratio thresholds for accurate sleep state classification.",
+    "image": null,
+    "icon": "eye",
+    "tech": ["OpenCV", "dlib", "Python", "NumPy"],
+    "highlights": [
+      "Real-time facial landmark tracking",
+      "Eye-aspect-ratio based drowsiness classification",
+      "Audio alarm trigger system"
+    ],
+    "github": null,
+    "demo": null,
+    "year": null,
+    "featured": false
+  },
+  {
+    "title": "Sine-wave Predictor",
+    "description": "Time series forecasting model that learns and predicts sine-wave patterns using a sequential neural network with Dense and SimpleRNN layers. A focused exploration of recurrent architectures for signal prediction.",
+    "image": null,
+    "icon": "activity",
+    "tech": ["TensorFlow", "Scikit-learn", "NumPy", "Matplotlib", "Python"],
+    "highlights": [
+      "Sequential model with Dense + SimpleRNN layers",
+      "Signal pattern learning and forecasting"
+    ],
+    "github": null,
+    "demo": null,
+    "year": null,
+    "featured": false
+  }
+]

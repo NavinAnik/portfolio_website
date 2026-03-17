@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, FileText, Users, ExternalLink } from "lucide-react";
+import { BookOpen, FileText, Users } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -10,21 +10,16 @@ import { fadeInUp, staggerContainer, viewportConfig } from "@/lib/animations";
 import researchData from "@/content/research.json";
 import Link from "next/link";
 
-type TabId = "projects" | "papers" | "conferences";
+type TabId = "papers" | "conferences";
 
 const tabs: { id: TabId; label: string; icon: React.ReactNode }[] = [
-  { id: "projects", label: "Research Projects", icon: <BookOpen className="h-4 w-4" /> },
   { id: "papers", label: "Papers", icon: <FileText className="h-4 w-4" /> },
   { id: "conferences", label: "Conferences", icon: <Users className="h-4 w-4" /> },
 ];
 
-function BookOpenIcon(props: React.SVGProps<SVGSVGElement>) {
-  return <BookOpen {...(props as React.ComponentProps<typeof BookOpen>)} />;
-}
-
 export default function Research() {
-  const { projects, papers, conferences, googleScholarUrl } = researchData;
-  const [activeTab, setActiveTab] = useState<TabId>("projects");
+  const { papers, conferences, googleScholarUrl } = researchData;
+  const [activeTab, setActiveTab] = useState<TabId>("papers");
 
   const hasPublished = papers.published.length > 0;
   const hasUnderReview = papers.underReview.length > 0;
@@ -40,9 +35,9 @@ export default function Research() {
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="research-heading"
-          label="04 — Research"
+          label="05 — Research"
           title="Research & Publications"
-          subtitle="Projects, papers, and academic participation."
+          subtitle="Papers, conferences, and academic participation."
         />
 
         <motion.div
@@ -80,50 +75,8 @@ export default function Research() {
             </div>
           </motion.div>
 
-          {/* Tab content with AnimatePresence */}
+          {/* Tab content */}
           <AnimatePresence mode="wait">
-            {activeTab === "projects" && (
-              <motion.div
-                key="projects"
-                id="panel-projects"
-                role="tabpanel"
-                aria-labelledby="tab-projects"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="grid gap-4">
-                  {projects.map((p, i) => (
-                    <div
-                      key={i}
-                      className="group rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          {"link" in p && p.link ? (
-                            <a
-                              href={p.link}
-                              className="font-medium text-primary hover:underline inline-flex items-center gap-1"
-                            >
-                              {p.title}
-                              <ExternalLink className="h-3 w-3" />
-                            </a>
-                          ) : (
-                            <p className="font-medium">{p.title}</p>
-                          )}
-                          <p className="text-sm mt-1 text-muted-foreground">{p.description}</p>
-                        </div>
-                        <Badge variant="secondary" className="text-xs shrink-0">
-                          {p.year}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
             {activeTab === "papers" && (
               <motion.div
                 key="papers"

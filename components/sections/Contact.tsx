@@ -9,6 +9,7 @@ import {
   BookOpen,
   BarChart3,
   PenLine,
+  MessageCircle,
   Send,
   CheckCircle2,
   AlertCircle,
@@ -25,6 +26,7 @@ const FORMSPREE_ENDPOINT =
 
 const contactLinks = [
   { label: "Email", href: `mailto:${CONTACT_EMAIL}`, icon: Mail },
+  { label: "WhatsApp", href: "https://wa.me/8801897913330", icon: MessageCircle },
   { label: "LinkedIn", href: SOCIAL_LINKS[0].href, icon: Linkedin },
   { label: "GitHub", href: SOCIAL_LINKS[1].href, icon: Github },
   { label: "Medium", href: SOCIAL_LINKS[2].href, icon: PenLine },

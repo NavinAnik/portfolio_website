@@ -155,6 +155,9 @@ export default function About() {
                 <p className="text-sm font-medium leading-relaxed">
                   Optimal Transport Theory based GAN for Medical Image Augmentation and Classification
                 </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  S. M. Navin Nayer Anik. Thesis - BRAC University, 2023.
+                </p>
               </div>
 
               <div className="rounded-xl border border-border bg-card p-5 space-y-3">

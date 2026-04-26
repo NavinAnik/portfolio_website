@@ -1,13 +1,36 @@
 {
   "papers": {
-    "published": [],
-    "underReview": [],
-    "inProgress": [
+    "published": [
       {
         "title": "Optimal Transport Theory based GAN for Medical Image Augmentation and Classification",
         "authors": "S. M. Navin Nayer Anik",
         "venue": "Thesis - BRAC University",
         "year": "2023",
+        "link": null
+      }
+    ],
+    "underReview": [
+      {
+        "title": "Cross-Domain Intelligent Fault Diagnosis with Superlet Spectrograms and a Parameter-Efficient CNN-Transformer Hybrid",
+        "authors": "S. M. Navin Nayer Anik",
+        "venue": "Submitted for publication",
+        "year": "2026",
+        "link": null
+      }
+    ],
+    "inProgress": [
+      {
+        "title": "From Acoustic Signals to Visual Patterns: Advancing Anomalous Sound Detection Using Self-Supervised Vision Transformers",
+        "authors": "S. M. Navin Nayer Anik",
+        "venue": "Manuscript in preparation",
+        "year": "2026",
+        "link": null
+      },
+      {
+        "title": "Robust Antimicrobial Resistance Prediction via MSFormer",
+        "authors": "S. M. Navin Nayer Anik",
+        "venue": "Manuscript in preparation",
+        "year": "2026",
         "link": null
       }
     ]
@@ -16,5 +39,5 @@
     { "name": "RoboSub International AUV Competition", "year": "2022", "role": "Top 10 Semifinalist & Outstanding Rookie Team (USA)" },
     { "name": "Conference on 4th IR", "year": "2021", "role": "Top 5 Industrial Projects" }
   ],
-  "googleScholarUrl": "https://scholar.google.com/"
+  "googleScholarUrl": "https://scholar.google.com/citations?user=x3J3cuQAAAAJ&hl=en&authuser=1"
 }

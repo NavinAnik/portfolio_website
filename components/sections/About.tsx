@@ -166,8 +166,9 @@ export default function About() {
                   <h3 className="text-xs font-medium uppercase tracking-wider">Current Role</h3>
                 </div>
                 <p className="text-sm leading-relaxed">
-                  Software Engineer I, AI/ML at Cefalo &mdash; ML for BioDrone
-                  (drone services, AI-driven aerial image analysis for forestry and agriculture)
+                  Software Engineer I, AI/ML at Cefalo &mdash; developing CNN and
+                  transformer-based computer vision models for BioDrone&apos;s aerial
+                  forestry and agricultural imagery analysis platform
                 </p>
               </div>
 

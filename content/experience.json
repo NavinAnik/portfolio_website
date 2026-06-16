@@ -4,12 +4,12 @@
     "company": "Cefalo",
     "location": "Dhaka, Bangladesh (Remote for Norway-based clients)",
     "duration": "Feb 2024 — Present",
-    "description": "Building production ML systems for international clients in aerial imaging, underwater robotics, generative AI, and real-time pricing.",
+    "description": "Developing and deploying computer vision, generative AI, and optimization models for international clients in aerial imaging, underwater robotics, and dynamic pricing.",
     "highlights": [
-      "BioDrone — ML model integration for AI-driven aerial image analysis in forestry and agriculture using PyTorch, SageMaker, and distributed training",
-      "Dobee — Built a Generative AI story generation system with Vertex AI, LangChain, BigQuery, and Firestore",
-      "TicketCo Data — Designed a real-time pricing engine using FastAPI, NATS streaming, and microservices architecture",
-      "AquaRobotics — Developed underwater image classification and GAN-based synthetic data generation, reducing training costs by 70% via Spot Instances"
+      "BioDrone — Developing CNN and transformer-based models for aerial forestry and agricultural image analysis, with data-centric quality analysis (3LC) and distributed training",
+      "Dobee — Built a generative AI story generation system with human-in-the-loop refinement, retrieval-and-synthesis pipeline, and conversational context injection",
+      "TicketCo Data — Formulated dynamic ticket pricing as constrained profit optimization; delivered rule-based PoC and designed ML forecasting roadmap",
+      "AquaRobotics — Developed underwater image classification with GAN-based synthetic augmentation to mitigate dataset bias and overfitting; reduced training cost by 70%"
     ]
   },
   {

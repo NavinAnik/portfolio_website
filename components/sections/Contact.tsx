@@ -14,17 +14,19 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
+  FileDown,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/Button";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, viewportConfig } from "@/lib/animations";
-import { SOCIAL_LINKS, GOOGLE_SCHOLAR_URL } from "@/lib/constants";
+import { SOCIAL_LINKS, GOOGLE_SCHOLAR_URL, CV_PDF_URL, CV_PDF_FILENAME } from "@/lib/constants";
 
 const CONTACT_EMAIL = "smnavinnayeranik@gmail.com";
 const FORMSPREE_ENDPOINT =
   process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/xgonlprz";
 
 const contactLinks = [
+  { label: "CV", href: CV_PDF_URL, icon: FileDown, download: CV_PDF_FILENAME },
   { label: "Email", href: `mailto:${CONTACT_EMAIL}`, icon: Mail },
   { label: "WhatsApp", href: "https://wa.me/8801897913330", icon: MessageCircle },
   { label: "LinkedIn", href: SOCIAL_LINKS[0].href, icon: Linkedin },
@@ -98,12 +100,13 @@ export default function Contact() {
               Reach out directly
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {contactLinks.map(({ label, href, icon: Icon }) => (
+              {contactLinks.map(({ label, href, icon: Icon, download }) => (
                 <a
                   key={label}
                   href={href}
-                  target={href.startsWith("mailto:") ? undefined : "_blank"}
-                  rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                  download={download}
+                  target={href.startsWith("mailto:") || download ? undefined : "_blank"}
+                  rel={href.startsWith("mailto:") || download ? undefined : "noopener noreferrer"}
                   className="group flex flex-col items-center gap-2 p-4 rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-primary/30"
                   aria-label={label}
                 >

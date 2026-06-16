@@ -1,7 +1,7 @@
 {
   "languages": ["Python", "JavaScript", "TypeScript", "Java", "Bash"],
   "mlDl": ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "OpenCV", "GANs", "Transformers", "Computer Vision", "Transfer Learning"],
-  "cloudMlops": ["AWS", "SageMaker", "GCP", "Docker", "Lambda", "EventBridge", "CloudWatch", "Distributed Training", "Spot Instances", "CI/CD", "3LC", "Google Colab"],
+  "cloudMlops": ["3LC", "Distributed Training", "SageMaker", "CI/CD", "Spot Instances", "AWS", "GCP", "Docker", "Lambda", "EventBridge", "CloudWatch", "Google Colab"],
   "dataAnalytics": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Apache Spark"],
   "databases": ["SQL", "MySQL", "MongoDB", "Firebase", "BigQuery"],
   "webDevTools": ["Node.js", "Express.js", "React.js", "Redux Toolkit", "Tailwind CSS", "REST APIs", "Jest", "Git", "Bitbucket", "ROS"]

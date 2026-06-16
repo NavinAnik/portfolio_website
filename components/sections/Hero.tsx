@@ -6,6 +6,7 @@ import { ArrowDown, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { staggerContainer, fadeInUp, blurFadeIn } from "@/lib/animations";
+import { CV_PDF_URL, CV_PDF_FILENAME } from "@/lib/constants";
 
 const specializations = [
   "Artificial Intelligence",
@@ -119,10 +120,10 @@ export default function Hero() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <Button variant="glow" size="lg" asChild>
-            <Link href="/cv.pdf">
+            <a href={CV_PDF_URL} download={CV_PDF_FILENAME}>
               <Sparkles className="h-4 w-4" />
               Download CV
-            </Link>
+            </a>
           </Button>
           <Button variant="secondary" size="lg" asChild>
             <Link href="#research">View Research</Link>

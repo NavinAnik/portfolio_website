@@ -13,7 +13,14 @@
       {
         "title": "Cross-Domain Intelligent Fault Diagnosis with Superlet Spectrograms and a Parameter-Efficient CNN-Transformer Hybrid",
         "authors": "S. M. Navin Nayer Anik",
-        "venue": "Submitted for publication",
+        "venue": "Under review at Nature",
+        "year": "2026",
+        "link": null
+      },
+      {
+        "title": "MSFormer: Multi-Label Antimicrobial Resistance Prediction from MALDI-TOF Spectra",
+        "authors": "S. M. Navin Nayer Anik",
+        "venue": "Under review at PLOS One",
         "year": "2026",
         "link": null
       }
@@ -21,13 +28,6 @@
     "inProgress": [
       {
         "title": "From Acoustic Signals to Visual Patterns: Advancing Anomalous Sound Detection Using Self-Supervised Vision Transformers",
-        "authors": "S. M. Navin Nayer Anik",
-        "venue": "Manuscript in preparation",
-        "year": "2026",
-        "link": null
-      },
-      {
-        "title": "Robust Antimicrobial Resistance Prediction via MSFormer",
         "authors": "S. M. Navin Nayer Anik",
         "venue": "Manuscript in preparation",
         "year": "2026",

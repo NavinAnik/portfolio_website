@@ -22,9 +22,10 @@ export default function Research() {
   const [activeTab, setActiveTab] = useState<TabId>("papers");
 
   const hasPublished = papers.published.length > 0;
+  const hasAccepted = papers.accepted.length > 0;
   const hasUnderReview = papers.underReview.length > 0;
   const hasInProgress = papers.inProgress.length > 0;
-  const hasPapers = hasPublished || hasUnderReview || hasInProgress;
+  const hasPapers = hasPublished || hasAccepted || hasUnderReview || hasInProgress;
 
   return (
     <section
@@ -94,6 +95,9 @@ export default function Research() {
                   <div className="space-y-6">
                     {hasPublished && (
                       <PaperGroup title="Published" variant="success" papers={papers.published} />
+                    )}
+                    {hasAccepted && (
+                      <PaperGroup title="Accepted" variant="success" papers={papers.accepted} />
                     )}
                     {hasUnderReview && (
                       <PaperGroup title="Under Review" variant="warning" papers={papers.underReview} />

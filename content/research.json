@@ -2,6 +2,13 @@
   "papers": {
     "published": [
       {
+        "title": "Cross-Domain Intelligent Fault Diagnosis with Superlet Spectrograms and a Parameter-Efficient CNN-Transformer Hybrid",
+        "authors": "S. M. Navin Nayer Anik, Md. Ehsanul Haque, Fahmid Al Farid, Mahe Zabin, Jia Uddin, Hezerul Bin Abdul Karim",
+        "venue": "Nature Scientific Reports",
+        "year": "2026",
+        "link": "https://www.nature.com/articles/s41598-026-61771-5"
+      },
+      {
         "title": "Optimal Transport Theory based GAN for Medical Image Augmentation and Classification",
         "authors": "S. M. Navin Nayer Anik",
         "venue": "Thesis - BRAC University",
@@ -9,15 +16,7 @@
         "link": null
       }
     ],
-    "accepted": [
-      {
-        "title": "Cross-Domain Intelligent Fault Diagnosis with Superlet Spectrograms and a Parameter-Efficient CNN-Transformer Hybrid",
-        "authors": "S. M. Navin Nayer Anik",
-        "venue": "Accepted at Nature Scientific Reports",
-        "year": "2026",
-        "link": null
-      }
-    ],
+    "accepted": [],
     "underReview": [
       {
         "title": "MSFormer: Multi-Label Antimicrobial Resistance Prediction from MALDI-TOF Spectra",

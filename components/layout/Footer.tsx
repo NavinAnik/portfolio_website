@@ -15,9 +15,9 @@ const socialIcons = [
 ];
 
 const NAV_LINKS = [
-  { href: "/#about", label: "About" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/#about", label: "Profile" },
   { href: "/#research", label: "Research" },
+  { href: "/#projects", label: "Applied" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -27,40 +27,34 @@ export default function Footer() {
   return (
     <footer className="border-t border-border">
       <motion.div
-        className="mx-auto max-w-[var(--content-max-width)] px-6 py-12"
+        className="mx-auto max-w-[var(--content-max-width)] px-6 py-10"
         variants={staggerContainer(0.08)}
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
       >
-        <motion.div variants={fadeInUp} className="flex flex-col items-center gap-8">
-          {/* Gradient separator */}
-          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-          {/* Social icons */}
-          <div className="flex items-center gap-3">
-            {socialIcons.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-all duration-200 hover:text-primary hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-sm"
-                aria-label={label}
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+        <motion.div
+          variants={fadeInUp}
+          className="flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-between md:gap-4"
+        >
+          {/* Brand + status */}
+          <div className="text-center md:text-left">
+            <p className="font-serif text-base font-medium tracking-tight">
+              S. M. Navin Nayer Anik
+            </p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+              ML research · perception systems · Dhaka, BD
+            </p>
           </div>
 
-          {/* Nav links */}
+          {/* Nav */}
           <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap items-center justify-center gap-6">
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
               {NAV_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-primary"
                   >
                     {label}
                   </Link>
@@ -69,11 +63,29 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Copyright */}
-          <p className="text-xs text-muted-foreground">
-            &copy; {currentYear} S. M. Navin Nayer Anik. All rights reserved.
-          </p>
+          {/* Social */}
+          <div className="flex items-center gap-2">
+            {socialIcons.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                aria-label={label}
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </motion.div>
+
+        <motion.p
+          variants={fadeInUp}
+          className="mt-8 border-t border-border pt-6 text-center font-mono text-[11px] text-muted-foreground"
+        >
+          © {currentYear} — built with Next.js · deployed on the web
+        </motion.p>
       </motion.div>
     </footer>
   );

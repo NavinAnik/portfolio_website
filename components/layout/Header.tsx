@@ -10,21 +10,21 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/Sheet";
 
 const SECTION_IDS = [
   "about",
+  "research",
+  "academic-projects",
   "experience",
   "projects",
-  "academic-projects",
-  "research",
   "skills",
   "contact",
 ] as const;
 
 const navLinks = [
-  { href: "#about", label: "About", id: "about" },
-  { href: "#experience", label: "Experience", id: "experience" },
-  { href: "#projects", label: "Projects", id: "projects" },
-  { href: "#academic-projects", label: "Academic", id: "academic-projects" },
+  { href: "#about", label: "Profile", id: "about" },
   { href: "#research", label: "Research", id: "research" },
-  { href: "#skills", label: "Skills", id: "skills" },
+  { href: "#academic-projects", label: "Projects", id: "academic-projects" },
+  { href: "#experience", label: "Career", id: "experience" },
+  { href: "#projects", label: "Applied", id: "projects" },
+  { href: "#skills", label: "Methods", id: "skills" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
 
@@ -33,7 +33,9 @@ export default function Header() {
   const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
+  // `solid` = scrolled past the dark hero into the body. While over the hero the
+  // header is transparent with light (ink) text; in the body it turns solid.
+  const [solid, setSolid] = useState(!isHome);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -43,10 +45,13 @@ export default function Header() {
   });
 
   useEffect(() => {
-    if (!isHome) return;
+    if (!isHome) {
+      setSolid(true);
+      return;
+    }
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setSolid(window.scrollY > window.innerHeight - 72);
 
       const viewportTop = window.scrollY + 150;
       let current: string | null = null;
@@ -73,10 +78,10 @@ export default function Header() {
         style={{ scaleX }}
       />
       <header
-        className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-          scrolled
-            ? "bg-background/80 backdrop-blur-xl border-border shadow-sm"
-            : "bg-background/50 backdrop-blur-md border-transparent"
+        className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+          solid
+            ? "bg-background/85 backdrop-blur-xl border-border shadow-sm"
+            : "hero-ink !bg-transparent border-transparent"
         }`}
       >
         <nav
@@ -85,17 +90,22 @@ export default function Header() {
         >
           <Link
             href="/"
-            className="font-serif text-lg tracking-tight transition-colors hover:text-primary"
+            className="group flex items-baseline gap-1.5 transition-colors hover:text-primary"
           >
-            Navin Nayer Anik
+            <span className="font-mono text-primary" aria-hidden>
+              &gt;
+            </span>
+            <span className="font-serif text-lg font-medium tracking-tight">
+              Navin Nayer Anik
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map(({ href, label, id }) => (
               <Link
                 key={href}
                 href={getNavHref(href)}
-                className="relative px-3 py-2 text-xs font-medium uppercase tracking-wider transition-colors rounded-md text-muted-foreground hover:text-foreground"
+                className="relative px-3 py-2 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors rounded-md text-muted-foreground hover:text-foreground"
               >
                 {label}
                 {activeSection === id && (
@@ -116,7 +126,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle />
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>

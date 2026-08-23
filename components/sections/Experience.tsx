@@ -1,111 +1,101 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { Badge } from "@/components/ui/Badge";
 import { staggerContainer, fadeInUp, viewportConfig } from "@/lib/animations";
 import experienceData from "@/content/experience.json";
 
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      className="py-20 md:py-28 px-6 bg-muted/50"
-      aria-labelledby="experience-heading"
-    >
+    <section id="experience" className="px-6 py-20 md:py-28" aria-labelledby="experience-heading">
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="experience-heading"
-          label="02 — Experience"
-          title="Work Experience"
-          subtitle="Career journey across AI/ML engineering, robotics, and full-stack development."
+          label="Career"
+          readout="2019 → now"
+          title="Trajectory"
+          subtitle="From leading software on an autonomous underwater vehicle to shipping ML for international clients."
         />
 
-        <motion.div
-          className="relative"
+        <motion.ol
           variants={staggerContainer(0.12)}
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
         >
-          {/* Timeline line */}
-          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-border md:left-1/2 md:-translate-x-px" aria-hidden />
+          {experienceData.map((job, i) => (
+            <motion.li
+              key={`${job.company}-${job.title}`}
+              variants={fadeInUp}
+              className="grid gap-2 md:grid-cols-[12rem_1fr] md:gap-8"
+            >
+              {/* Left: span + company */}
+              <div className="pt-5 md:pt-6">
+                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                  {job.duration}
+                </p>
+              </div>
 
-          <div className="space-y-10">
-            {experienceData.map((job, i) => (
-              <motion.div
-                key={`${job.company}-${job.title}`}
-                variants={fadeInUp}
-                className={`relative flex flex-col md:flex-row gap-6 md:gap-10 ${
-                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-[12px] top-1.5 z-10 md:left-1/2 md:-translate-x-1/2">
-                  <div className="flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-primary bg-background">
-                    <div className="h-[5px] w-[5px] rounded-full bg-primary" />
-                  </div>
-                </div>
-
-                {/* Duration badge (desktop: centered on timeline) */}
-                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-0">
-                  <Badge variant="secondary" className="text-[10px] font-mono whitespace-nowrap">
-                    {job.duration}
-                  </Badge>
-                </div>
-
-                {/* Spacer for alternating layout */}
-                <div className="hidden md:block md:w-1/2" />
-
-                {/* Card */}
-                <div className="ml-10 md:ml-0 md:w-1/2">
-                  {/* Duration badge (mobile only) */}
-                  <div className="md:hidden mb-2">
-                    <Badge variant="secondary" className="text-[10px] font-mono">
-                      {job.duration}
-                    </Badge>
-                  </div>
-
-                  <div className="group rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5">
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary mt-0.5">
-                        <Briefcase className="h-4 w-4" />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-serif text-lg font-normal leading-snug">
-                          {job.title}
-                        </h3>
-                        <p className="text-sm font-medium text-primary">
-                          {job.company}
-                        </p>
-                        <p className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                          <MapPin className="h-3 w-3" />
-                          {job.location}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                      {job.description}
-                    </p>
-
-                    {job.highlights.length > 0 && (
-                      <ul className="space-y-1.5">
-                        {job.highlights.map((highlight, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm">
-                            <span className="text-primary/60 mt-0.5 shrink-0">&bull;</span>
-                            <span className="text-muted-foreground">{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              {/* Right: node + content on a timeline rail */}
+              <div className="relative border-l border-border pb-8 pl-6 md:pt-6">
+                <span
+                  className="absolute -left-[5px] top-6 h-2.5 w-2.5 rounded-full border-2 border-primary bg-background md:top-7"
+                  aria-hidden
+                />
+                <h3 className="font-serif text-lg font-medium tracking-tight md:text-xl">
+                  {job.title}
+                </h3>
+                <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm">
+                  <span className="font-medium text-primary">{job.company}</span>
+                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                    <MapPin className="h-3 w-3" />
+                    {job.location}
+                  </span>
+                </p>
+                {"roles" in job && job.roles && job.roles.length > 0 && (
+                  <ol className="mt-3 space-y-1 border-l border-border/60 pl-4">
+                    {job.roles.map((r, k) => (
+                      <li
+                        key={k}
+                        className="flex flex-wrap items-baseline justify-between gap-x-3 text-sm"
+                      >
+                        <span
+                          className={
+                            "current" in r && r.current
+                              ? "flex items-center gap-1.5 font-medium text-primary"
+                              : "text-muted-foreground"
+                          }
+                        >
+                          {"current" in r && r.current && <span aria-hidden>▸</span>}
+                          {r.title}
+                        </span>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                          {r.duration}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                  {job.description}
+                </p>
+                {job.highlights.length > 0 && (
+                  <ul className="mt-3 space-y-1.5">
+                    {job.highlights.map((h, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm text-foreground/90">
+                        <span className="mt-1 text-primary" aria-hidden>
+                          ▸
+                        </span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </motion.li>
+          ))}
+        </motion.ol>
       </div>
     </section>
   );

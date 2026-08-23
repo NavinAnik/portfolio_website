@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "S. M. Navin Nayer Anik — Software Engineer I, AI/ML",
+    name: "S. M. Navin Nayer Anik — Machine Learning Researcher",
     short_name: "Navin Anik",
     description:
-      "Portfolio of S. M. Navin Nayer Anik — Software Engineer I, AI/ML at Cefalo. Machine learning, computer vision, and generative AI.",
+      "Portfolio of S. M. Navin Nayer Anik — machine learning researcher in computer vision, deep learning, and generative models. Applied ML at Cefalo.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

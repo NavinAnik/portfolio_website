@@ -1,156 +1,167 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowDown, FileDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import CornerMarks from "@/components/ui/CornerMarks";
 import { staggerContainer, fadeInUp, blurFadeIn } from "@/lib/animations";
 import { CV_PDF_URL, CV_PDF_FILENAME } from "@/lib/constants";
 
-const specializations = [
-  "Artificial Intelligence",
-  "Machine Learning",
-  "Computer Vision",
-  "Deep Learning",
-  "Robotics",
-];
+const PROFILE_IMAGE = "/images/profile.webp";
+const PROFILE_FALLBACK = "/images/profile.png";
 
 export default function Hero() {
-  const [currentSpecIndex, setCurrentSpecIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSpecIndex((prev) => (prev + 1) % specializations.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  const [imgError, setImgError] = useState(false);
+  const profileSrc = imgError ? PROFILE_FALLBACK : PROFILE_IMAGE;
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 overflow-hidden"
+      className="hero-ink scanlines relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-24"
       aria-label="Introduction"
     >
-      {/* Animated mesh gradient background */}
+      {/* Depth: coordinate ticks + a drifting scan bar + a faint signal bloom */}
+      <div className="grid-ticks pointer-events-none absolute inset-0 opacity-[0.07]" />
+      <div className="scan-bar" />
       <div
-        className="absolute inset-0 -z-10 opacity-30 dark:opacity-20 animate-mesh will-change-auto"
+        className="pointer-events-none absolute -right-40 -top-40 h-[38rem] w-[38rem] rounded-full opacity-30 blur-3xl"
         style={{
-          backgroundImage:
-            "linear-gradient(-45deg, hsl(213 94% 68% / 0.3), hsl(260 80% 70% / 0.2), hsl(190 90% 60% / 0.2), hsl(213 74% 23% / 0.3))",
-          backgroundSize: "400% 400%",
+          background:
+            "radial-gradient(circle, hsl(var(--signal) / 0.22), transparent 70%)",
         }}
       />
-
-      {/* Dot grid pattern */}
-      <div
-        className="absolute inset-0 -z-10 opacity-[0.03] dark:opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
-      {/* Noise overlay */}
-      <div className="absolute inset-0 -z-10 opacity-[0.015] dark:opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')] bg-repeat" />
 
       <motion.div
-        className="max-w-[var(--content-max-width)] mx-auto w-full text-center"
-        variants={staggerContainer(0.15, 0.1)}
+        className="relative mx-auto w-full max-w-[var(--content-max-width)]"
+        variants={staggerContainer(0.12, 0.05)}
         initial="hidden"
         animate="visible"
       >
-        {/* Status badge */}
-        <motion.div variants={fadeInUp} className="mb-6">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-medium text-muted-foreground">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 will-change-transform" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            Available for collaboration
-          </span>
-        </motion.div>
-
-        {/* Role label */}
-        <motion.p
-          variants={fadeInUp}
-          className="text-xs font-mono font-medium uppercase tracking-[0.15em] text-primary mb-4"
-        >
-          Software Engineer I, AI/ML &middot; Cefalo
-        </motion.p>
-
-        {/* Name */}
-        <motion.h1
-          variants={blurFadeIn}
-          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight mb-4"
-        >
-          S. M. Navin Nayer Anik
-        </motion.h1>
-
-        {/* Rotating specialization */}
-        <motion.div variants={fadeInUp} className="h-8 mb-6 overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={specializations[currentSpecIndex]}
-              initial={{ y: 20, opacity: 0, scale: 0.96 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: -20, opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
-              className="text-lg md:text-xl font-medium text-muted-foreground"
-            >
-              {specializations[currentSpecIndex]}
-            </motion.p>
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Bio */}
-        <motion.p
-          variants={fadeInUp}
-          className="max-w-2xl mx-auto mb-10 text-base md:text-lg leading-relaxed text-muted-foreground"
-        >
-          ML engineer building production AI systems &mdash; from aerial image
-          analysis for forestry to underwater computer vision and generative AI
-          pipelines. Research focus on Optimal Transport GANs for medical image
-          augmentation.
-        </motion.p>
-
-        {/* CTA buttons */}
+        {/* Instrument top rail */}
         <motion.div
           variants={fadeInUp}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="mb-12 flex items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground md:mb-16"
         >
-          <Button variant="glow" size="lg" asChild>
-            <a href={CV_PDF_URL} download={CV_PDF_FILENAME}>
-              <Sparkles className="h-4 w-4" />
-              Download CV
-            </a>
-          </Button>
-          <Button variant="secondary" size="lg" asChild>
-            <Link href="#research">View Research</Link>
-          </Button>
-          <Button variant="outline" size="lg" asChild>
-            <Link href="#contact">Contact Me</Link>
-          </Button>
+          <span className="text-primary">[ research · perception systems ]</span>
+          <span className="hidden sm:inline">23.8103°N · 90.4125°E</span>
+        </motion.div>
+
+        <div className="grid items-center gap-12 md:grid-cols-[1.35fr_1fr] md:gap-16">
+          {/* Left: identity + thesis */}
+          <div className="order-2 md:order-1">
+            <motion.p
+              variants={fadeInUp}
+              className="mb-5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-primary"
+            >
+              Machine Learning Researcher · Computer Vision &amp; Deep Learning
+            </motion.p>
+
+            <motion.h1
+              variants={blurFadeIn}
+              className="font-serif text-[2.6rem] font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
+            >
+              S. M. Navin
+              <br />
+              Nayer Anik
+            </motion.h1>
+
+            <motion.p
+              variants={fadeInUp}
+              className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            >
+              I research perception under uncertainty — how models keep seeing
+              correctly when the signal is noisy, the labels are scarce, and the
+              world shifts: forests read from drones, structure recovered from
+              murky water, disease inferred from spectra.
+            </motion.p>
+
+            <motion.div
+              variants={fadeInUp}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <Button variant="glow" size="lg" asChild>
+                <a href={CV_PDF_URL} download={CV_PDF_FILENAME}>
+                  <FileDown className="h-4 w-4" />
+                  Download CV
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link href="#research">Read the research</Link>
+              </Button>
+              <Button variant="ghost" size="lg" asChild>
+                <Link href="#contact">Get in touch</Link>
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Right: portrait as a frame under analysis */}
+          <motion.div
+            variants={blurFadeIn}
+            className="order-1 mx-auto w-full max-w-[300px] md:order-2 md:ml-auto md:mr-0"
+          >
+            <div className="relative text-signal">
+              {/* the frame */}
+              <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-border bg-card">
+                <Image
+                  src={profileSrc}
+                  alt="S. M. Navin Nayer Anik"
+                  width={448}
+                  height={560}
+                  className="h-full w-full object-cover"
+                  sizes="(max-width: 768px) 300px, 360px"
+                  priority
+                  onError={() => setImgError(true)}
+                />
+                {/* sensor-feed scanlines over the subject */}
+                <div className="scanlines pointer-events-none absolute inset-0" />
+                {/* the detection box edge */}
+                <div className="pointer-events-none absolute inset-2 rounded-sm border border-signal/60" />
+              </div>
+
+              <CornerMarks size="1.1rem" inset="-3px" weight="2px" />
+
+              {/* detection tag — lands last */}
+              <motion.div
+                initial={{ opacity: 0, y: -6, scale: 0.92 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 1.05, type: "spring", stiffness: 320, damping: 22 }}
+                className="absolute -top-3 left-3 flex items-center gap-2"
+              >
+                <span className="rounded-sm bg-signal px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-[hsl(200_40%_8%)] shadow-sm">
+                  subject: anik
+                </span>
+                <span className="rounded-sm border border-signal/50 bg-[hsl(200_46%_6%)] px-1.5 py-0.5 font-mono text-[10px] text-signal">
+                  0.99
+                </span>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Instrument bottom rail */}
+        <motion.div
+          variants={fadeInUp}
+          className="mt-14 flex items-center justify-between gap-4 border-t border-border pt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground md:mt-20"
+        >
+          <span className="inline-flex items-center gap-2">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 motion-safe:animate-ping" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Open to research collaboration
+          </span>
+          <a
+            href="#about"
+            className="group inline-flex items-center gap-2 transition-colors hover:text-foreground"
+            aria-label="Scroll to profile"
+          >
+            <span className="hidden sm:inline">Scroll to decode</span>
+            <ArrowDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" />
+          </a>
         </motion.div>
       </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.a
-        href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.2 }}
-        aria-label="Scroll to about section"
-      >
-        <span className="text-xs tracking-wider uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown className="h-4 w-4" />
-        </motion.div>
-      </motion.a>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, Space_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -9,9 +9,9 @@ import ThemeProvider from "@/components/providers/ThemeProvider";
 import BackToTop from "@/components/ui/BackToTop";
 import { SITE_URL, SOCIAL_LINKS, GOOGLE_SCHOLAR_URL } from "@/lib/constants";
 
-const headingFont = Instrument_Serif({
+const headingFont = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   variable: "--font-heading",
 });
 
@@ -21,16 +21,16 @@ const bodyFont = Inter({
   variable: "--font-body",
 });
 
-const codeFont = JetBrains_Mono({
+const codeFont = Space_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "700"],
   variable: "--font-code",
 });
 
 const FULL_NAME = "S. M. Navin Nayer Anik";
-const TITLE = `${FULL_NAME} | Software Engineer I, AI/ML`;
+const TITLE = `${FULL_NAME} | Machine Learning Researcher (Computer Vision & Deep Learning)`;
 const DESCRIPTION =
-  "Software Engineer I, AI/ML at Cefalo. Building production ML systems for BioDrone (aerial image analysis), Aqua Robotics (underwater computer vision), and generative AI pipelines. Former BRACU DUBURI Sub-Team Lead. Research focus: Optimal Transport GANs for medical image augmentation.";
+  "Machine learning researcher in computer vision and deep learning. First-author work in Nature Scientific Reports (cross-domain fault diagnosis), antimicrobial-resistance prediction from MALDI-TOF spectra under review, self-supervised vision transformers for anomalous sound detection in preparation, and an optimal-transport GAN thesis for medical image augmentation. Applied ML at Cefalo; former BRACU DUBURI AUV software lead.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,10 +40,16 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
-    "machine learning",
+    "machine learning research",
+    "computer vision research",
     "deep learning",
+    "generative models",
+    "self-supervised learning",
+    "anomaly detection",
+    "biomedical signal processing",
+    "machine learning",
     "computer vision",
-    "AI engineer",
+    "AI researcher",
     "PyTorch",
     "TensorFlow",
     "GANs",
@@ -116,7 +122,7 @@ const jsonLd = {
       "@id": `${SITE_URL}/#person`,
       name: FULL_NAME,
       url: SITE_URL,
-      jobTitle: "Software Engineer I, AI/ML",
+      jobTitle: "Machine Learning Researcher",
       worksFor: {
         "@type": "Organization",
         name: "Cefalo",
@@ -133,6 +139,8 @@ const jsonLd = {
         "Computer Vision",
         "Generative Adversarial Networks",
         "Optimal Transport Theory",
+        "Self-Supervised Learning",
+        "Anomaly Detection",
         "Medical Image Analysis",
         "Transfer Learning",
         "PyTorch",

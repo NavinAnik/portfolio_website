@@ -15,6 +15,7 @@ import {
   AlertCircle,
   Loader2,
   FileDown,
+  ArrowUpRight,
 } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/Button";
@@ -35,6 +36,9 @@ const contactLinks = [
   { label: "TDS", href: SOCIAL_LINKS[3].href, icon: BarChart3 },
   { label: "Scholar", href: GOOGLE_SCHOLAR_URL, icon: BookOpen },
 ];
+
+const fieldClasses =
+  "w-full rounded-sm border border-border bg-background px-3.5 py-2.5 text-sm text-foreground transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -74,74 +78,74 @@ export default function Contact() {
   }
 
   return (
-    <section
-      id="contact"
-      className="py-20 md:py-28 px-6 bg-muted/50"
-      aria-labelledby="contact-heading"
-    >
+    <section id="contact" className="px-6 py-20 md:py-28" aria-labelledby="contact-heading">
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <SectionTitle
           id="contact-heading"
-          label="07 — Contact"
-          title="Get In Touch"
-          subtitle="Interested in collaboration, research, or opportunities? Let's connect."
+          label="Contact"
+          readout="● open to research collaboration"
+          title="Let's talk"
+          subtitle="Research collaboration, a hard perception problem, or just to compare notes — send a note or reach me on any channel below."
         />
 
         <motion.div
-          className="grid md:grid-cols-2 gap-10 md:gap-16"
+          className="grid gap-10 md:grid-cols-2 md:gap-14"
           variants={staggerContainer(0.15)}
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
         >
-          {/* Social links */}
+          {/* Directory */}
           <motion.div variants={fadeInLeft}>
-            <h3 className="font-serif text-xl font-normal mb-6">
-              Reach out directly
+            <h3 className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
+              [ Channels ]
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <ul className="border-t border-border">
               {contactLinks.map(({ label, href, icon: Icon, download }) => (
-                <a
-                  key={label}
-                  href={href}
-                  download={download}
-                  target={href.startsWith("mailto:") || download ? undefined : "_blank"}
-                  rel={href.startsWith("mailto:") || download ? undefined : "noopener noreferrer"}
-                  className="group flex flex-col items-center gap-2 p-4 rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-primary/30"
-                  aria-label={label}
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted group-hover:bg-primary/10 transition-colors">
-                    <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </div>
-                  <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                    {label}
-                  </span>
-                </a>
+                <li key={label}>
+                  <a
+                    href={href}
+                    download={download}
+                    target={href.startsWith("mailto:") || download ? undefined : "_blank"}
+                    rel={href.startsWith("mailto:") || download ? undefined : "noopener noreferrer"}
+                    className="group flex items-center gap-3 border-b border-border py-3 text-sm transition-colors hover:text-primary"
+                  >
+                    <Icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                    <span className="font-medium">{label}</span>
+                    <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
 
-          {/* Contact form */}
+          {/* Message panel */}
           <motion.div variants={fadeInRight}>
-            <h3 className="font-serif text-xl font-normal mb-6">
-              Send a message
+            <h3 className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
+              [ Send a message ]
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 rounded-sm border border-border bg-card p-5 md:p-6">
               <div>
-                <label htmlFor="contact-email" className="sr-only">
-                  Your email
+                <label
+                  htmlFor="contact-email"
+                  className="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground"
+                >
+                  Email
                 </label>
                 <input
                   id="contact-email"
                   type="email"
                   name="email"
                   required
-                  placeholder="Your email"
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-card text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary placeholder:text-muted-foreground"
+                  placeholder="you@domain.com"
+                  className={fieldClasses}
                 />
               </div>
               <div>
-                <label htmlFor="contact-message" className="sr-only">
+                <label
+                  htmlFor="contact-message"
+                  className="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground"
+                >
                   Message
                 </label>
                 <textarea
@@ -149,16 +153,11 @@ export default function Contact() {
                   name="message"
                   required
                   rows={5}
-                  placeholder="Your message"
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-card text-foreground transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-y placeholder:text-muted-foreground"
+                  placeholder="What are you working on?"
+                  className={`${fieldClasses} resize-y`}
                 />
               </div>
-              <Button
-                type="submit"
-                disabled={status === "sending"}
-                variant="glow"
-                className="w-full sm:w-auto"
-              >
+              <Button type="submit" disabled={status === "sending"} variant="glow" className="w-full sm:w-auto">
                 <AnimatePresence mode="wait" initial={false}>
                   {status === "sending" ? (
                     <motion.span
@@ -169,7 +168,7 @@ export default function Contact() {
                       className="flex items-center gap-2"
                     >
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Sending...
+                      Sending…
                     </motion.span>
                   ) : (
                     <motion.span
@@ -192,10 +191,10 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    className="flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400"
+                    className="flex items-center gap-2 text-sm font-medium text-primary"
                   >
                     <CheckCircle2 className="h-4 w-4" />
-                    Message sent successfully!
+                    Message sent — I&apos;ll reply soon.
                   </motion.p>
                 )}
                 {status === "error" && (
@@ -203,10 +202,10 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    className="flex items-center gap-2 text-sm font-medium text-red-600 dark:text-red-400"
+                    className="flex items-center gap-2 text-sm font-medium text-destructive"
                   >
                     <AlertCircle className="h-4 w-4" />
-                    Something went wrong. Please email me directly at {CONTACT_EMAIL}
+                    Couldn&apos;t send. Email me directly at {CONTACT_EMAIL}.
                   </motion.p>
                 )}
               </AnimatePresence>

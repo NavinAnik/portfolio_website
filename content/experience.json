@@ -3,24 +3,20 @@
     "title": "Software Engineer I, AI/ML",
     "company": "Cefalo",
     "location": "Dhaka, Bangladesh (Remote for Norway-based clients)",
-    "duration": "Feb 2024 — Present",
+    "duration": "Sep 2023 — Present",
     "description": "Developing and deploying computer vision, generative AI, and optimization models for international clients in aerial imaging, underwater robotics, and dynamic pricing.",
+    "roles": [
+      { "title": "Trainee Software Engineer", "duration": "Sep 2023 — Apr 2024" },
+      { "title": "Associate Software Engineer", "duration": "Apr 2024 — Jun 2025" },
+      { "title": "Associate Software Engineer II", "duration": "May 2025 — Feb 2026" },
+      { "title": "Software Engineer I", "duration": "Jan 2026 — Present", "current": true }
+    ],
     "highlights": [
       "BioDrone — Developing CNN and transformer-based models for aerial forestry and agricultural image analysis, with data-centric quality analysis (3LC) and distributed training",
       "Dobee — Built a generative AI story generation system with human-in-the-loop refinement, retrieval-and-synthesis pipeline, and conversational context injection",
       "TicketCo Data — Formulated dynamic ticket pricing as constrained profit optimization; delivered rule-based PoC and designed ML forecasting roadmap",
-      "AquaRobotics — Developed underwater image classification with GAN-based synthetic augmentation to mitigate dataset bias and overfitting; reduced training cost by 70%"
-    ]
-  },
-  {
-    "title": "Junior Software Developer",
-    "company": "Cefalo",
-    "location": "Dhaka, Bangladesh",
-    "duration": "Sep 2023 — Feb 2024",
-    "description": "Full-stack development with a focus on building secure, tested web applications.",
-    "highlights": [
-      "Built a full-stack blogging platform with JWT authentication, role-based access, and comprehensive unit testing",
-      "Worked with React, TypeScript, Express.js, Redux Toolkit, and Tailwind CSS"
+      "AquaRobotics — Developed underwater image classification with GAN-based synthetic augmentation to mitigate dataset bias and overfitting; reduced training cost by 70%",
+      "Built a full-stack blogging platform with JWT authentication, role-based access, and comprehensive unit testing (React, TypeScript, Express.js, Redux Toolkit)"
     ]
   },
   {

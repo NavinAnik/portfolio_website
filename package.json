@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node node_modules/next/dist/bin/next dev",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@next/third-parties": "^16.2.9",
@@ -31,7 +31,7 @@
     "@types/node": "^22.9.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^10.0.3",
+    "eslint": "^9.39.5",
     "eslint-config-next": "^16.1.6",
     "postcss": "^8.4.47",
     "tailwindcss": "^4.2.1",

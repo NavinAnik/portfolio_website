@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { href: "/#about", label: "Profile" },
   { href: "/#research", label: "Research" },
   { href: "/#projects", label: "Applied" },
+  { href: "/#personal", label: "Personal" },
   { href: "/#contact", label: "Contact" },
 ];
 

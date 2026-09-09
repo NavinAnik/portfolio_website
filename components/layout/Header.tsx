@@ -10,7 +10,9 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/Sheet";
 
 const SECTION_IDS = [
   "about",
+  "news",
   "research",
+  "writing",
   "academic-projects",
   "experience",
   "projects",
@@ -20,7 +22,9 @@ const SECTION_IDS = [
 
 const navLinks = [
   { href: "#about", label: "Profile", id: "about" },
+  { href: "#news", label: "News", id: "news" },
   { href: "#research", label: "Research", id: "research" },
+  { href: "#writing", label: "Writing", id: "writing" },
   { href: "#academic-projects", label: "Projects", id: "academic-projects" },
   { href: "#experience", label: "Career", id: "experience" },
   { href: "#projects", label: "Applied", id: "projects" },
@@ -33,9 +37,11 @@ export default function Header() {
   const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  // `solid` = scrolled past the dark hero into the body. While over the hero the
-  // header is transparent with light (ink) text; in the body it turns solid.
-  const [solid, setSolid] = useState(!isHome);
+  // Tracks whether we've scrolled past the dark hero into the body, only
+  // relevant on the home page. `solid` below folds in the non-home case.
+  const [pastHero, setPastHero] = useState(false);
+  // `solid` = header should render opaque instead of transparent-over-hero.
+  const solid = !isHome || pastHero;
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -45,13 +51,10 @@ export default function Header() {
   });
 
   useEffect(() => {
-    if (!isHome) {
-      setSolid(true);
-      return;
-    }
+    if (!isHome) return;
 
     const handleScroll = () => {
-      setSolid(window.scrollY > window.innerHeight - 72);
+      setPastHero(window.scrollY > window.innerHeight - 72);
 
       const viewportTop = window.scrollY + 150;
       let current: string | null = null;

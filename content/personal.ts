@@ -27,17 +27,18 @@ export interface Clip {
   caption?: string;
 }
 
-// TODO(content): the framing line tying photography to the research identity.
 export const framing =
-  "TODO framing line — e.g. \"I study how models learn to see. Off the clock, I practice seeing myself — light, composition, attention.\"";
+  "The same attention that chases signal in noisy data, off the clock — pointed at moonlight, wet sand, and empty roads after dark.";
 
 export const photos: Photo[] = [
-  { src: "/images/personal/frame-01.webp", alt: "TODO: describe photo 1" },
-  { src: "/images/personal/frame-02.webp", alt: "TODO: describe photo 2" },
-  { src: "/images/personal/frame-03.webp", alt: "TODO: describe photo 3" },
-  { src: "/images/personal/frame-04.webp", alt: "TODO: describe photo 4" },
-  { src: "/images/personal/frame-05.webp", alt: "TODO: describe photo 5" },
-  { src: "/images/personal/frame-06.webp", alt: "TODO: describe photo 6" },
+  { src: "/images/personal/frame-01.webp", alt: "Silhouette on a riverbank at night, standing under a full moon" },
+  { src: "/images/personal/frame-02.webp", alt: "Motorcycle helmet resting on a cafe table beside a cup of tea" },
+  { src: "/images/personal/frame-03.webp", alt: "A tree-lined checkered footpath at night, lit by a streetlight" },
+  { src: "/images/personal/frame-04.webp", alt: "Aerial view of the Banani skyline in Dhaka at dusk" },
+  { src: "/images/personal/frame-05.webp", alt: "Loose wires crossing an empty road under overcast sky" },
+  { src: "/images/personal/frame-06.webp", alt: "Dramatic sunset over a Dhaka street corner" },
+  { src: "/images/personal/frame-07.webp", alt: "A dual-monitor desk setup at night with warm ambient lighting" },
+  { src: "/images/personal/frame-08.webp", alt: "Silhouette standing on a wet beach at sunset, reflected in the sand" },
 ];
 
 export const clips: Clip[] = [

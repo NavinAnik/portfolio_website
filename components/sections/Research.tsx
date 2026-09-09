@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Trophy } from "lucide-react";
+import { BookOpen, ExternalLink, Trophy } from "lucide-react";
 import Link from "next/link";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { Badge } from "@/components/ui/Badge";
@@ -41,7 +41,7 @@ function Authors({ authors }: { authors: string }) {
 }
 
 export default function Research() {
-  const { papers, conferences, googleScholarUrl } = researchData;
+  const { papers, conferences, googleScholarUrl, webOfScienceUrl } = researchData;
 
   const group = (arr: unknown[], status: Status) =>
     (arr as Paper[]).map((p) => ({ ...p, status }));
@@ -132,11 +132,17 @@ export default function Research() {
             </div>
           </motion.div>
 
-          <motion.div variants={fadeInUp}>
+          <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
             <Button variant="outline" asChild>
               <Link href={googleScholarUrl} target="_blank" rel="noopener noreferrer">
                 <BookOpen className="h-4 w-4" />
                 View on Google Scholar
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href={webOfScienceUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                View on Web of Science
               </Link>
             </Button>
           </motion.div>

@@ -11,6 +11,7 @@ const TAG_VARIANT: Record<NewsTag, "success" | "warning" | "info"> = {
   AWARD: "success",
   TALK: "warning",
   MILESTONE: "info",
+  REVIEW: "info",
 };
 
 const MONTHS = [
